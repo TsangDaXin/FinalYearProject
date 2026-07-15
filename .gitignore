@@ -1,7 +1,6 @@
 *.keras
 *.h5
 *.backup
-ml_workflow/data/
 backEnd/data/
 **/__pycache__/
 
