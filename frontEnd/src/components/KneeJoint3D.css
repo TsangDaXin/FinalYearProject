@@ -1,0 +1,57 @@
+.annotation-card {
+  background: rgba(10, 12, 20, 0.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: white;
+  font-size: 11px;
+  white-space: nowrap;
+  font-family: system-ui, -apple-system, sans-serif;
+  transition: all 0.2s ease;
+}
+
+.annotation-clickable {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.annotation-clickable:hover {
+  background: rgba(255, 109, 41, 0.15);
+  border-color: rgba(255, 109, 41, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 109, 41, 0.2);
+}
+
+.annotation-clickable:active {
+  transform: scale(0.97);
+}
+
+.annotation-card .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4fc3f7;
+  margin-right: 6px;
+  vertical-align: middle;
+  box-shadow: 0 0 4px #4fc3f7;
+}
+
+.annotation-clickable:hover .dot {
+  background: #FF6D29;
+  box-shadow: 0 0 6px #FF6D29;
+}
+
+.tap-icon {
+  margin-left: 6px;
+  opacity: 0.4;
+  font-size: 14px;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.annotation-clickable:hover .tap-icon {
+  opacity: 1;
+  color: #FF6D29;
+}

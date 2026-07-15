@@ -1,0 +1,30 @@
+Test Accuracy: 0.5876
+Balanced Accuracy: 0.5834
+MAE: 0.5166
+QWK: 0.7896
+
+Validation classification report:
+              precision    recall  f1-score   support
+
+     Healthy       0.68      0.66      0.67       328
+    Doubtful       0.27      0.44      0.33       153
+     Minimal       0.63      0.37      0.47       212
+    Moderate       0.68      0.67      0.68       106
+      Severe       0.68      0.70      0.69        27
+
+    accuracy                           0.53       826
+   macro avg       0.59      0.57      0.57       826
+weighted avg       0.59      0.55      0.56       826
+
+Test classification report:
+              precision    recall  f1-score   support
+
+     Healthy       0.74      0.74      0.74       639
+    Doubtful       0.30      0.49      0.38       296
+     Minimal       0.62      0.45      0.52       447
+    Moderate       0.72      0.53      0.61       223
+      Severe       0.63      0.71      0.67        51
+
+    accuracy                           0.59      1656
+   macro avg       0.60      0.58      0.58      1656
+weighted avg       0.63      0.59      0.60      1656

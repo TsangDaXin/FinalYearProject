@@ -1,0 +1,2 @@
+Split,Overall Accuracy,Balanced Accuracy,MAE,Macro ROC AUC (ordinal),Weighted ROC AUC,Quadratic Weighted Kappa
+Test,0.6105,0.5806,0.5121,0.9348,0.831,0.7445

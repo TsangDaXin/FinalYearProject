@@ -1,0 +1,23 @@
+*.keras
+*.h5
+*.backup
+ml_workflow/data/
+backEnd/data/
+**/__pycache__/
+
+# Virtual Environments
+venv/
+venv310/
+env/
+.venv/
+.env/
+
+# Node
+node_modules/
+dist/
+.DS_Store
+
+# API Keys and Environment Variables
+.env
+.env.*
+!.env.example

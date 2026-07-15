@@ -1,0 +1,6 @@
+KL Grade,Sensitivity (%),Specificity (%),F1-score (%)
+Healthy,90.9,67.7,75.1
+Doubtful,7.1,97.1,11.8
+Minimal,57.0,88.3,60.5
+Moderate,78.5,96.7,78.5
+Severe,90.2,98.7,78.0

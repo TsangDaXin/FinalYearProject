@@ -1,0 +1,6 @@
+{
+  "accuracy": 0.6388888888888888,
+  "balanced_accuracy": 0.6230788176148503,
+  "macro_roc_auc": 0.8694173576875919,
+  "weighted_roc_auc": 0.8455657008508255
+}

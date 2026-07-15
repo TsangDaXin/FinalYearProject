@@ -1,0 +1,4 @@
+Model,Accuracy (%),Precision (%),Recall (%),F1-score (%)
+Custom CNN (CCNN),60.81,55.5,63.1,56.6
+Fine-Tuned VGG16 (FVGG),63.35,63.4,62.6,61.8
+Ensemble (EA),65.1,62.0,64.7,60.8

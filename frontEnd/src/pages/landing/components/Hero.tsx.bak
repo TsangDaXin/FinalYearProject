@@ -1,0 +1,369 @@
+import { Play, Clipboard, Layers, CheckCircle2, Send } from "lucide-react";
+import { motion } from "framer-motion";
+import { ContainerScroll } from "../../components/ui/container-scroll-animation";
+
+interface HeroProps {
+  onOpenSandbox: () => void;
+}
+
+export function Hero({ onOpenSandbox }: HeroProps) {
+
+  return (
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0B0C10] pb-20 pt-32">
+
+      {/* Task 1: Massive, soft ambient glow centered at the top */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[800px] h-[500px] bg-blue-500/15 rounded-full blur-[120px] -z-10 pointer-events-none" />
+      <div className="absolute left-1/2 -translate-x-1/2 top-40 w-[600px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] -z-10 pointer-events-none" />
+
+      {/* Grid Pattern overlay for SaaS texture */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center">
+
+        {/* Task 5: Scroll animation wrapper for Hero Text stack */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center max-w-4xl mx-auto flex flex-col items-center"
+        >
+          {/* Top Pill centered */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-md">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            FDA Breakthrough Device Designation Pending
+          </div>
+
+          {/* Middle Headings Centered */}
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight font-heading max-w-3xl overflow-hidden">
+            Smart Prediction for <br />
+            <span 
+              className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 inline-block glitch-word"
+              data-text="Knee Recovery."
+            >
+              Knee Recovery.
+            </span>
+          </h1>
+
+          {/* Subtext Centered */}
+          <p className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed font-sans">
+            A clinical-grade AI assistant that clearly explains your knee X-rays, provides explainable segmentations, and builds a customized daily rehabilitation routine.
+          </p>
+
+          {/* Primary CTA centered */}
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={onOpenSandbox}
+              className="px-8 py-4 bg-[#3B82F6] hover:bg-blue-600 hover:scale-[1.02] active:scale-[0.98] text-white font-semibold rounded-xl transition-all flex items-center gap-2.5 shadow-lg shadow-blue-500/20 cursor-pointer text-sm tracking-wide font-sans font-medium"
+            >
+              <Play className="w-4 h-4 text-white fill-white" />
+              Start Analyzing
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Task 2: Mockup below CTA */}
+        <div className="w-full flex justify-center mt-20">
+          <ContainerScroll
+            titleComponent={
+              <div className="flex flex-col items-center justify-center space-y-4 mb-4">
+                <div className="flex items-center justify-center gap-2 mb-1.5 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs font-mono text-emerald-400 font-bold uppercase tracking-widest">
+                    PREDICTION COMPLETE
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight font-heading leading-tight max-w-2xl text-center">
+                  Severity Analysis of Knee Osteoarthritis
+                </h2>
+              </div>
+            }
+          >
+            <div className="flex flex-col space-y-5 w-full">
+              {/* Actions row inside the scrollable container */}
+              <div className="flex justify-end gap-2 pb-4 border-b border-white/5 w-full pt-2 pr-2">
+                <button className="px-3.5 py-2 text-[10px] font-bold text-white bg-transparent hover:bg-white/5 border border-white/10 rounded-lg transition-colors uppercase tracking-wider font-mono">
+                  Export PDF
+                </button>
+                <button className="px-3.5 py-2 text-[10px] font-bold text-[#121214] bg-white hover:bg-gray-200 border border-white/10 rounded-lg transition-colors uppercase tracking-wider font-mono">
+                  Validate Results
+                </button>
+              </div>
+
+            {/* Grid of the three key cards (Input, Overlay, KL Grade Prediction) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+
+              {/* Panel 1: Input Image */}
+              <div className="bg-[#18181b]/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between text-left">
+                <div className="flex items-center gap-1.5 mb-3 text-gray-300">
+                  <Layers className="w-3.5 h-3.5 text-gray-400" />
+                  <span className="text-xs font-bold font-mono tracking-tight">Input Image</span>
+                </div>
+                <div className="relative aspect-square rounded-xl overflow-hidden border border-white/5 bg-black/60">
+                  <img
+                    alt="Input Knee X-Ray"
+                    className="w-full h-full object-cover opacity-85"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO0oLkU1jswtcfCb3UFOyavLw9lIDqbjRzr1_LQQqPNddriYyN7TCt-259mNByIVHB5bw2FA8vyCW0OpN2qfsohiyXtzkAyA-T5ZWmCMLimKq1KBBhuaDGns1IELPNIExBLAibgset-OvXmROTvc3cevly54UgqeMunEXw6jniNyBQemVxvvvsGDM3-bGza-ucJrUD3x_tmszT6zbG7JyP5yG1ax3qqyQCjmOjTyCVjDhx5rWgrKT9_7vxmYgCSdcMNM51kjs0nG4"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </div>
+
+              {/* Panel 2: Explainability (Grad-CAM Overlay) */}
+              <div className="bg-[#18181b]/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between text-left">
+                <div className="flex items-center gap-1.5 mb-3 text-gray-300">
+                  <Layers className="w-3.5 h-3.5 text-gray-400" />
+                  <span className="text-xs font-bold font-mono tracking-tight">Explainability (Grad-CAM)</span>
+                </div>
+                <div className="relative aspect-square rounded-xl overflow-hidden border border-white/5 bg-black/60">
+                  <img
+                    alt="Input Knee X-Ray Heatmap"
+                    className="w-full h-full object-cover opacity-60"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO0oLkU1jswtcfCb3UFOyavLw9lIDqbjRzr1_LQQqPNddriYyN7TCt-259mNByIVHB5bw2FA8vyCW0OpN2qfsohiyXtzkAyA-T5ZWmCMLimKq1KBBhuaDGns1IELPNIExBLAibgset-OvXmROTvc3cevly54UgqeMunEXw6jniNyBQemVxvvvsGDM3-bGza-ucJrUD3x_tmszT6zbG7JyP5yG1ax3qqyQCjmOjTyCVjDhx5rWgrKT9_7vxmYgCSdcMNM51kjs0nG4"
+                    referrerPolicy="no-referrer"
+                  />
+                  {/* CSS Heatmap Overlay mimicking exact look */}
+                  <div className="absolute inset-0 bg-radial-gradient from-red-600/50 via-yellow-500/35 to-transparent mix-blend-color-burn pointer-events-none" />
+                </div>
+              </div>
+
+              {/* Panel 3: KL Grade Prediction */}
+              <div className="bg-[#18181b]/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between space-y-3 text-left">
+                <div>
+                  <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest block">KL GRADE PREDICTION</span>
+                  <h4 className="text-3xl font-black text-white tracking-tight font-heading leading-tight mt-0.5">
+                    Healthy
+                  </h4>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between text-[10px] font-mono text-gray-400 mb-1">
+                    <span>Confidence Score</span>
+                    <span className="font-bold text-gray-300">32.7%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-black/40 rounded-full overflow-hidden">
+                    <div className="h-full bg-[#3B82F6] rounded-full" style={{ width: "32.7%" }} />
+                  </div>
+                </div>
+
+                <div className="space-y-1 pt-1 border-t border-white/5 font-mono">
+                  <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest block mb-1">PROBABILITY DISTRIBUTION</span>
+
+                  <div className="space-y-1.5 text-[10px]">
+                    {/* Healthy */}
+                    <div>
+                      <div className="flex items-center justify-between text-gray-300 text-[10px]">
+                        <span>Healthy</span>
+                        <span className="font-mono text-gray-400">66.3%</span>
+                      </div>
+                      <div className="h-1 w-full bg-black/40 rounded-full overflow-hidden mt-0.5">
+                        <div className="h-full bg-[#3B82F6] rounded-full" style={{ width: "66.3%" }} />
+                      </div>
+                    </div>
+
+                    {/* Doubtful */}
+                    <div>
+                      <div className="flex items-center justify-between text-gray-300 text-[10px]">
+                        <span>Doubtful</span>
+                        <span className="font-mono text-gray-400">21.2%</span>
+                      </div>
+                      <div className="h-1 w-full bg-black/40 rounded-full overflow-hidden mt-0.5">
+                        <div className="h-full bg-[#6366F1] rounded-full" style={{ width: "21.2%" }} />
+                      </div>
+                    </div>
+
+                    {/* Minimal */}
+                    <div>
+                      <div className="flex items-center justify-between text-gray-300 text-[10px]">
+                        <span>Minimal</span>
+                        <span className="font-mono text-gray-400">12.5%</span>
+                      </div>
+                      <div className="h-1 w-full bg-black/40 rounded-full overflow-hidden mt-0.5">
+                        <div className="h-full bg-[#D16900] rounded-full" style={{ width: "12.5%" }} />
+                      </div>
+                    </div>
+
+                    {/* Moderate */}
+                    <div>
+                      <div className="flex items-center justify-between text-gray-400 text-[10px]">
+                        <span>Moderate</span>
+                        <span className="font-mono text-gray-500">0.0%</span>
+                      </div>
+                      <div className="h-1 w-full bg-black/40 rounded-full overflow-hidden mt-0.5">
+                        <div className="h-full bg-gray-700/25 rounded-full" style={{ width: "0%" }} />
+                      </div>
+                    </div>
+
+                    {/* Severe */}
+                    <div>
+                      <div className="flex items-center justify-between text-gray-400 text-[10px]">
+                        <span>Severe</span>
+                        <span className="font-mono text-gray-500">0.0%</span>
+                      </div>
+                      <div className="h-1 w-full bg-black/40 rounded-full overflow-hidden mt-0.5">
+                        <div className="h-full bg-gray-700/25 rounded-full" style={{ width: "0%" }} />
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Bottom Row Grid containing Diagnostics and Orionix chat */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 text-left">
+
+              {/* Diagnostics Insights */}
+              <div className="lg:col-span-8 bg-[#18181b]/30 border border-white/5 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
+                <div className="flex items-center gap-2 text-emerald-400">
+                  <Clipboard className="w-4 h-4 text-emerald-400" />
+                  <span className="text-xs font-bold font-mono tracking-widest uppercase">
+                    Diagnostic Insights <span className="text-[10px] text-gray-550 font-normal lowercase">(AI Generated)</span>
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest block mb-2.5">
+                      Possible reasons for the diagnostic
+                    </span>
+                    <ul className="text-[11px] text-gray-400 space-y-2.5 list-none pl-0 leading-relaxed font-sans">
+                      <li className="flex items-start gap-1.5">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 select-none" />
+                        <span>No visible osteophytes, joint space narrowing, or subchondral sclerosis detected on the radiographs.</span>
+                      </li>
+                      <li className="flex items-start gap-1.5">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 select-none" />
+                        <span>Hyaline cartilage volume and underlying subchondral bone integrity both appear within normal parameters.</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest block mb-2.5">
+                      Recommended Interventions
+                    </span>
+                    <ul className="text-[11px] text-gray-400 space-y-2.5 list-none pl-0 leading-relaxed font-sans">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                        <span>PEAK strength and mobility exercises to reinforce quad alignment.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                        <span>Regular low-impact walking and maintaining healthy weight loads.</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Orionix Assistant Mini Chat widget */}
+              <div className="lg:col-span-4 bg-[#18181b]/30 border border-white/5 rounded-2xl p-5 flex flex-col justify-between space-y-3">
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <div className="flex items-center gap-2">
+                    {/* Stylized Avatar container */}
+                    <div className="w-6 h-6 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                      <div className="w-3 h-3 bg-blue-400 rounded-sm flex items-center justify-center opacity-80" style={{ clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)" }} />
+                    </div>
+                    <span className="text-xs font-bold text-white font-heading">Orionix Assistant</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400 tracking-wider flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    Online
+                  </span>
+                </div>
+
+                {/* Message stack with Bot icon */}
+                <div className="flex items-start gap-2.5 bg-black/20 rounded-xl p-3 flex-1">
+                  <div className="w-5 h-5 rounded bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-[10px] shrink-0 font-bold mt-0.5">
+                    🤖
+                  </div>
+                  <div className="text-[10.5px] text-gray-300 leading-relaxed max-h-[100px] overflow-y-auto w-full">
+                    Hello! I've reviewed your results. Let's start custom predictions below!
+                  </div>
+                </div>
+
+                {/* Input field with Send button */}
+                <div className="relative flex items-center mt-2 w-full">
+                  <input
+                    disabled
+                    placeholder="Ask about your condition..."
+                    className="w-full bg-[#0B0C10] text-[10.5px] border border-white/10 rounded-xl pl-3 pr-9 py-2 text-white outline-none placeholder:text-gray-600 focus:border-[#3B82F6]"
+                  />
+                  <button className="absolute right-1.5 w-6 h-6 rounded-full bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 flex items-center justify-center transition-colors cursor-not-allowed">
+                    <Send className="w-2.5 h-2.5" />
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            </div>
+          </ContainerScroll>
+        </div>
+
+        {/* Task 3: Trust Bar (Social Proof) centered immediately below the mockup */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.25, ease: "easeOut" }}
+          className="pt-20 pb-10 w-full text-center max-w-5xl"
+        >
+          <p className="text-[#424754]/80 text-xs font-bold tracking-[0.25em] uppercase mb-8">
+            Trusted by leading orthopaedic researchers and clinical institutions
+          </p>
+
+          {/* Flex Row of sleek Hospital/Clinical logo marks */}
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 md:gap-x-16 opacity-40 hover:opacity-60 transition-opacity duration-300">
+            {/* Logo 1 - Beacon Joint */}
+            <div className="flex items-center gap-2 select-none">
+              <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span className="font-heading font-extrabold tracking-wider text-xs text-gray-400 uppercase">Apex Orthopaedics</span>
+            </div>
+
+            {/* Logo 2 - Synergy Medical */}
+            <div className="flex items-center gap-2 select-none">
+              <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="2" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <span className="font-heading font-extrabold tracking-wider text-xs text-gray-400 uppercase">Synergy Clinical</span>
+            </div>
+
+            {/* Logo 3 - Vertex Health */}
+            <div className="flex items-center gap-2 select-none">
+              <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+              <span className="font-heading font-extrabold tracking-wider text-xs text-gray-400 uppercase">Vertex Rehab</span>
+            </div>
+
+            {/* Logo 4 - Nova Research */}
+            <div className="flex items-center gap-2 select-none">
+              <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
+              <span className="font-heading font-extrabold tracking-wider text-xs text-gray-400 uppercase">Nova Institute</span>
+            </div>
+
+            {/* Logo 5 - Beacon Diagnostics */}
+            <div className="flex items-center gap-2 select-none">
+              <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              <span className="font-heading font-extrabold tracking-wider text-xs text-gray-400 uppercase">Beacon Joint Care</span>
+            </div>
+          </div>
+        </motion.div>
+
+      </div>
+    </section>
+  );
+}

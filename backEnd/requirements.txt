@@ -1,0 +1,25 @@
+# ─── Core Framework ───────────────────────────────────────────────────────────
+fastapi
+uvicorn[standard]
+python-dotenv
+python-multipart
+
+# ─── ML / X-Ray Prediction ───────────────────────────────────────────────────
+tensorflow>=2.20.0
+opencv-python
+numpy>=1.26.0
+
+# ─── AI Recommendations (Groq - Llama 3.3 70B) ──────────────────────────────
+groq
+
+# ─── RAG (Retrieval-Augmented Generation) ────────────────────────────────────
+langchain
+langchain-community
+chromadb
+pypdf
+sentence-transformers
+
+# ─── Utilities ────────────────────────────────────────────────────────────────
+pydantic
+sqlalchemy
+psycopg2-binary

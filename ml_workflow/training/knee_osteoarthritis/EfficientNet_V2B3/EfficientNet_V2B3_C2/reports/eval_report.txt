@@ -1,0 +1,21 @@
+Model           : EfficientNet-V2B3
+Split           : Test
+Overall Accuracy: 0.6473
+Balanced Acc    : 0.6518
+MAE             : 0.4511
+Macro AUC (ord) : 0.9403
+Weighted AUC    : 0.8547
+QWK             : 0.7760
+
+Classification Report:
+              precision    recall  f1-score   support
+
+     Healthy     0.6828    0.8185    0.7445       639
+    Doubtful     0.3006    0.1757    0.2217       296
+     Minimal     0.6195    0.6264    0.6229       447
+    Moderate     0.8122    0.7758    0.7936       223
+      Severe     0.8462    0.8627    0.8544        51
+
+    accuracy                         0.6473      1656
+   macro avg     0.6522    0.6518    0.6474      1656
+weighted avg     0.6198    0.6473    0.6282      1656
