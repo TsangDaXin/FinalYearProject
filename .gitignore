@@ -20,3 +20,7 @@ dist/
 .env
 .env.*
 !.env.example
+
+# IDE and Custom Folders
+.vscode/
+.kiro/
