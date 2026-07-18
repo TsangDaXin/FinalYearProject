@@ -1,0 +1,311 @@
+# SteadyGerak — AI-Powered Knee Osteoarthritis Severity Monitoring & Rehabilitation Platform
+
+<p align="center">
+  <img src="docs/screenshots/banner.png" alt="SteadyGerak Banner" width="100%" />
+</p>
+
+## System Overview
+
+**SteadyGerak** is a full-stack web application that combines deep learning-based radiographic analysis with Self-Determination Theory (SDT) behavioural mechanisms to provide knee osteoarthritis patients with accessible severity classification, explainable AI insights, and longitudinal rehabilitation monitoring.
+
+---
+
+## Project Objectives
+
+| # | Objective |
+|---|-----------|
+| 1 | To conduct a detailed analysis of the Osteoarthritis Initiative (OAI) dataset to identify imbalances in KL grade distribution and apply appropriate balancing strategies to reduce predictive bias for underrepresented severity levels. |
+| 2 | To design and evaluate deep learning models based on optimised convolutional neural network architectures with the goal of capturing subtle radiographic patterns and accurately classifying Kellgren-Lawrence (KL) grades. |
+| 3 | To incorporate Explainable Artificial Intelligence (XAI) using the Grad-CAM framework so that each AI-generated grade is supported by clear visual explanation, improving transparency and strengthening clinical trust. |
+| 4 | To develop a behavioural monitoring ecosystem grounded in Self-Determination Theory (SDT) that enables longitudinal tracking of joint health and promotes a sense of competence with the intention of improving long-term rehabilitation adherence. |
+| 5 | To optimise the selected models for cross-platform deployment and evaluate their inference efficiency to ensure real-time diagnostic performance, while minimising computational barriers for older and resource-constrained users. |
+
+---
+
+## Problem Statement
+
+Knee osteoarthritis (OA) is a progressive degenerative joint disease affecting over 500 million people globally, with disproportionate prevalence among older adults. Current diagnostic workflows rely heavily on manual radiographic assessment by orthopaedic specialists, which is:
+
+- **Subjective** — Inter-rater variability in KL grade assignment between clinicians can reach 30%.
+- **Inaccessible** — Patients in underserved areas face long wait times for specialist consultation.
+- **Opaque** — Patients receive a grade without understanding what radiographic features drove the classification.
+- **Static** — A one-time diagnosis provides no mechanism for longitudinal monitoring or rehabilitation adherence support.
+
+SteadyGerak addresses these gaps by providing automated, explainable KL grade classification paired with a behavioural ecosystem that motivates long-term self-management.
+
+---
+
+## Model Comparison Results
+
+Three CNN architectures were evaluated across multiple training configurations (C1–C4), varying learning rates, regularisation, augmentation, and scheduling strategies.
+
+### Architecture Comparison Summary
+
+| Model | Config | Test MAE | Test Accuracy | Parameters | Approach |
+|-------|--------|----------|---------------|------------|----------|
+| ResNet-50 | C1 | *your value* | *your value* | ~25.6M | Manual tuning |
+| ResNet-50 | C2 | *your value* | *your value* | ~25.6M | Manual tuning |
+| ResNet-50 | C3 | *your value* | *your value* | ~25.6M | Manual tuning |
+| ResNet-50 | C4 | *your value* | *your value* | ~25.6M | Manual tuning |
+| DenseNet-121 | C1 | *your value* | *your value* | ~8M | Manual tuning |
+| DenseNet-121 | C2 | *your value* | *your value* | ~8M | Manual tuning |
+| DenseNet-121 | C3 | *your value* | *your value* | ~8M | Manual tuning |
+| EfficientNet V2-B3 | KerasTuner | *your value* | *your value* | ~14M | Automated (KerasTuner) |
+| **EfficientNet V2-B3** | **C4** | ***your value*** | ***your value*** | **~14M** | **Manual tuning** |
+
+> **Best Model:** EfficientNet V2-B3 Configuration 4 (C4)
+
+
+
+## Justification: Manual Hyperparameter Tuning over Automated Search
+
+While KerasTuner was explored for automated hyperparameter optimisation (see `EfficientNet_V2B3_KerasTuner` configuration), the final best-performing model (EfficientNet V2-B3 C4) was produced through **manual iterative tuning**. The justification is as follows:
+
+1. **Domain-informed decisions** — Medical imaging tasks benefit from practitioner intuition about augmentation intensity, dropout rates, and learning rate schedules that automated search spaces may not adequately capture. For example, aggressive augmentation that distorts joint geometry can harm OA classification but automated search treats it as just another parameter.
+
+2. **Iterative learning from failure** — Each manual configuration (C1 → C2 → C3 → C4) was designed in response to specific failure modes observed in the previous iteration (e.g., overfitting on minority classes, unstable validation loss, poor generalisation). This diagnostic approach is difficult to encode in an automated search objective.
+
+3. **Computational efficiency** — KerasTuner requires hundreds of trial runs, each training for multiple epochs. With a dataset of this size and model complexity, the search consumed significant GPU hours while the manual approach reached a superior result in 4 targeted iterations.
+
+4. **Reproducibility and interpretability** — Each manual configuration has a clear, documented rationale. Automated search produces a result but offers limited insight into *why* that combination works, making it harder to justify in an academic context.
+
+5. **Empirical validation** — The manually-tuned C4 configuration outperformed the KerasTuner-optimised configuration on test metrics, confirming that informed manual tuning can surpass automated search when the practitioner understands the problem domain.
+
+---
+
+## Interface Design
+
+<!-- Add your screenshots below -->
+
+| Screenshot | Description |
+|------------|-------------|
+| ![Dashboard](docs/screenshots/dashboard.png) | Daily Action Dashboard with SDT gamification elements |
+| ![Diagnostics](docs/screenshots/diagnostics.png) | Diagnostic Results with Grad-CAM overlay |
+| ![Probability](docs/screenshots/probability.png) | Probability Distribution (General View) |
+| ![Progression](docs/screenshots/progression.png) | Disease Progression Spectrum |
+| ![Joint Map](docs/screenshots/joint-map.png) | Interactive 3D Joint Map |
+| ![Population](docs/screenshots/population.png) | Population Comparison |
+| ![Biomechanical](docs/screenshots/biomechanical.png) | Biomechanical Breakdown Radar |
+| ![Check-in](docs/screenshots/checkin.png) | Weekly Self-Report Check-In Modal |
+| ![Chat](docs/screenshots/chat.png) | SteadyGerak AI Assistant |
+
+---
+
+## Pre-trained Model Weights
+
+The trained model weights are too large for Git. Download from Google Drive:
+
+| Model | Purpose | Link |
+|-------|---------|------|
+| EfficientNet V2-B3 (C4) | KL Grade Prediction | [Download best_model_weights.h5](YOUR_GOOGLE_DRIVE_LINK_HERE) |
+| MobileNetV2 (Gatekeeper) | Knee X-Ray Validation | [Download gatekeeper_weights.h5](YOUR_GOOGLE_DRIVE_LINK_HERE) |
+
+After downloading, place both files in:
+```
+ml_workflow/best_model/
+├── best_model_weights.h5
+└── gatekeeper_weights.h5
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 19, TypeScript, Vite, TailwindCSS 4, Framer Motion, Recharts, Three.js |
+| Backend | Python 3.10, FastAPI, Uvicorn, SQLAlchemy |
+| ML/AI | TensorFlow 2.20+, EfficientNetV2B3, OpenCV, Grad-CAM |
+| LLM | Groq (Llama 3.3 70B) for recommendations & chat |
+| RAG | LangChain, ChromaDB, Sentence-Transformers (all-MiniLM-L6-v2) |
+| Database | PostgreSQL (Supabase) |
+| Storage | Supabase Storage (X-ray images, Grad-CAM overlays) |
+| Auth | Supabase Auth |
+
+---
+
+## How to Run
+
+### Prerequisites
+
+- Python 3.10
+- Node.js 18+
+- PostgreSQL database (or Supabase project)
+- Groq API key ([get one here](https://console.groq.com/keys))
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/FinalYearProject.git
+cd FinalYearProject
+```
+
+### 2. Backend Setup
+
+```bash
+cd backEnd
+
+# Create virtual environment
+python -m venv venv310
+venv310\Scripts\activate        # Windows
+# source venv310/bin/activate   # macOS/Linux
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the `backEnd/` directory:
+
+```env
+# Database
+DATABASE_URL=postgresql://user:password@host:port/dbname
+
+# Supabase
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_KEY=your-supabase-service-role-key
+
+# Groq LLM
+GROQ_API_KEY=your_groq_api_key
+LLM_MODEL=llama-3.3-70b-versatile
+MAX_TOKENS=3072
+TEMPERATURE=0.5
+
+# Model paths (default paths work if weights are in ml_workflow/best_model/)
+PREDICTION_MODEL_PATH=../ml_workflow/best_model/best_model_weights.h5
+GATEKEEPER_MODEL_PATH=../ml_workflow/best_model/gatekeeper_weights.h5
+GATEKEEPER_THRESHOLD=0.5
+```
+
+### 4. Download Model Weights
+
+Download from the [Google Drive links above](#pre-trained-model-weights) and place in `ml_workflow/best_model/`.
+
+### 5. Run the Backend
+
+```bash
+cd backEnd
+python main.py
+```
+
+The API will be available at `http://localhost:8000`. Verify with:
+```
+GET http://localhost:8000/health
+```
+
+### 6. Frontend Setup
+
+```bash
+cd frontEnd
+
+# Install dependencies
+npm install
+```
+
+Create a `.env` file in the `frontEnd/` directory:
+
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+VITE_YOUTUBE_API_KEY=your-youtube-api-key
+```
+
+### 7. Run the Frontend
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`.
+
+---
+
+## Project Structure
+
+```
+FinalYearProject/
+├── backEnd/
+│   ├── main.py                    # FastAPI entry point
+│   ├── database.py                # SQLAlchemy DB connection
+│   ├── config/settings.py         # App configuration
+│   ├── routers/
+│   │   ├── prediction.py          # X-ray upload & KL grade prediction
+│   │   ├── recommendations.py     # AI physiotherapy recommendations
+│   │   ├── chat.py                # SteadyGerak Assistant chatbot
+│   │   ├── insights.py            # Diagnostic insights generation
+│   │   └── progress.py            # SDT monitoring (streaks, check-ins, XP)
+│   ├── services/
+│   │   ├── model_loader.py        # Model architecture & weight loading
+│   │   ├── gradcam.py             # Grad-CAM heatmap generation
+│   │   ├── gate_service.py        # SDT gamification logic
+│   │   ├── gemini_client.py       # LLM API client
+│   │   ├── rag_service.py         # RAG retrieval pipeline
+│   │   ├── prompt_builder.py      # Recommendation prompt construction
+│   │   └── recommendation_generator.py
+│   ├── data/
+│   │   ├── medical_pdfs/          # RAG source documents
+│   │   └── chroma_db/             # Vector store persistence
+│   └── requirements.txt
+├── frontEnd/
+│   └── src/
+│       ├── pages/
+│       │   ├── dashboard/         # Daily Action Dashboard
+│       │   ├── diagnostics/       # Diagnostic Results & General View
+│       │   └── treatment/         # Routine & Mastery pages
+│       └── components/
+│           └── WeeklyCheckInModal.tsx
+└── ml_workflow/
+    ├── eda/                       # Exploratory Data Analysis notebooks
+    ├── training/
+    │   └── knee_osteoarthritis/
+    │       ├── ResNet_50/         # ResNet-50 configs (C1–C4)
+    │       ├── DenseNet-121/      # DenseNet-121 configs (C1–C3)
+    │       └── EfficientNet_V2B3/ # EfficientNet configs (KerasTuner, C4)
+    └── best_model/                # Final deployed weights (.h5)
+```
+
+---
+
+## Key Libraries
+
+### Backend (Python)
+
+| Library | Version | Purpose |
+|---------|---------|---------|
+| fastapi | latest | REST API framework |
+| tensorflow | ≥2.20.0 | Deep learning inference |
+| opencv-python | latest | Image preprocessing (CLAHE, resize) |
+| numpy | ≥1.26.0 | Array operations |
+| langchain | latest | RAG pipeline orchestration |
+| chromadb | latest | Vector database for RAG |
+| sentence-transformers | latest | Document embedding (all-MiniLM-L6-v2) |
+| sqlalchemy | latest | Database ORM |
+| psycopg2-binary | latest | PostgreSQL driver |
+| groq | latest | LLM API client (Llama 3.3 70B) |
+
+### Frontend (TypeScript/React)
+
+| Library | Version | Purpose |
+|---------|---------|---------|
+| react | 19.x | UI framework |
+| vite | 8.x | Build tool |
+| tailwindcss | 4.x | Utility-first CSS |
+| framer-motion | 12.x | Animations & transitions |
+| recharts | 3.x | Data visualisation (charts) |
+| three / @react-three/fiber | latest | 3D knee joint visualisation |
+| @supabase/supabase-js | 2.x | Auth, DB, and storage client |
+
+---
+
+## License
+
+This project was developed as a Final Year Project at Asia Pacific University of Technology & Innovation (APU).
+
+---
+
+## Author
+
+**Owen Tsang** — TP071168  
+BSc (Hons) in ______  
+Asia Pacific University of Technology & Innovation

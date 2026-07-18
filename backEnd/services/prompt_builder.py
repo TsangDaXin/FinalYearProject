@@ -2,9 +2,7 @@
 Builds the AI recommendation prompt from prediction results and user profile.
 Optionally enriches with RAG context from medical PDFs.
 """
-
 from services.rag_service import retrieve_context
-
 
 def build_recommendation_prompt(
     prediction_result: dict,
