@@ -108,6 +108,53 @@ export default function TreatmentDiagnosticsPage({ onNavigate, userStreak = 0, c
     resolveEligibility();
   }, [completedCheckInWeeks]);
 
+  // ─── Realtime: re-check eligibility when a new check-in is inserted ─────────
+  React.useEffect(() => {
+    let channel: any = null;
+    const setupRealtime = async () => {
+      const { supabase } = await import('../../lib/supabase');
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user) return;
+
+      channel = supabase
+        .channel('checkin-updates')
+        .on(
+          'postgres_changes',
+          {
+            event: 'INSERT',
+            schema: 'public',
+            table: 'weekly_checkins',
+            filter: `user_id=eq.${session.user.id}`,
+          },
+          () => {
+            // Re-fetch the check-in count when a new one is added
+            const refetch = async () => {
+              const { count } = await supabase
+                .from('weekly_checkins')
+                .select('*', { count: 'exact', head: true })
+                .eq('user_id', session.user.id)
+                .gt('check_in_week_number', lastScanWeek);
+              
+              const newCount = count ?? 0;
+              setCheckInsSinceScan(newCount);
+              setIsUnlocked(newCount >= 12);
+            };
+            refetch();
+          }
+        )
+        .subscribe();
+    };
+    setupRealtime();
+
+    return () => {
+      if (channel) {
+        import('../../lib/supabase').then(({ supabase }) => {
+          supabase.removeChannel(channel);
+        });
+      }
+    };
+  }, [lastScanWeek]);
+
   // Fetch baseline scan from scan_history on mount
   React.useEffect(() => {
     if (!isUnlocked) return;
@@ -419,7 +466,7 @@ export default function TreatmentDiagnosticsPage({ onNavigate, userStreak = 0, c
             {/* Progress Indicator */}
             <div className="pt-2 flex items-center justify-center gap-2 text-sm text-gray-500">
               <span className="material-symbols-outlined text-base">schedule</span>
-              <span>Week {currentWeekNumber} — {lastScanWeek > 0 ? `Next scan at Week ${nextUnlockWeek}` : `Unlocks at Week 12`}</span>
+              <span>Week {currentWeekNumber} — {checkInsSinceScan} of 12 check-ins completed</span>
             </div>
           </motion.div>
           ) : (
