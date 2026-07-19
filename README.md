@@ -1,7 +1,7 @@
 # SteadyGerak — AI-Powered Knee Osteoarthritis Severity Monitoring & Rehabilitation Platform
 
 <p align="center">
-  <img src="docs/screenshots/banner.png" alt="SteadyGerak Banner" width="100%" />
+  <img src="dashboard_screenshot/main_dashboard.png" alt="SteadyGerak Banner" width="100%" />
 </p>
 
 ## System Overview
@@ -12,13 +12,13 @@
 
 ## Project Objectives
 
-| # | Objective |
-|---|-----------|
-| 1 | To conduct a detailed analysis of the Osteoarthritis Initiative (OAI) dataset to identify imbalances in KL grade distribution and apply appropriate balancing strategies to reduce predictive bias for underrepresented severity levels. |
-| 2 | To design and evaluate deep learning models based on optimised convolutional neural network architectures with the goal of capturing subtle radiographic patterns and accurately classifying Kellgren-Lawrence (KL) grades. |
-| 3 | To incorporate Explainable Artificial Intelligence (XAI) using the Grad-CAM framework so that each AI-generated grade is supported by clear visual explanation, improving transparency and strengthening clinical trust. |
-| 4 | To develop a behavioural monitoring ecosystem grounded in Self-Determination Theory (SDT) that enables longitudinal tracking of joint health and promotes a sense of competence with the intention of improving long-term rehabilitation adherence. |
-| 5 | To optimise the selected models for cross-platform deployment and evaluate their inference efficiency to ensure real-time diagnostic performance, while minimising computational barriers for older and resource-constrained users. |
+| #   | Objective                                                                                                                                                                                                                                           |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | To conduct a detailed analysis of the Osteoarthritis Initiative (OAI) dataset to identify imbalances in KL grade distribution and apply appropriate balancing strategies to reduce predictive bias for underrepresented severity levels.            |
+| 2   | To design and evaluate deep learning models based on optimised convolutional neural network architectures with the goal of capturing subtle radiographic patterns and accurately classifying Kellgren-Lawrence (KL) grades.                         |
+| 3   | To incorporate Explainable Artificial Intelligence (XAI) using the Grad-CAM framework so that each AI-generated grade is supported by clear visual explanation, improving transparency and strengthening clinical trust.                            |
+| 4   | To develop a behavioural monitoring ecosystem grounded in Self-Determination Theory (SDT) that enables longitudinal tracking of joint health and promotes a sense of competence with the intention of improving long-term rehabilitation adherence. |
+| 5   | To optimise the selected models for cross-platform deployment and evaluate their inference efficiency to ensure real-time diagnostic performance, while minimising computational barriers for older and resource-constrained users.                 |
 
 ---
 
@@ -41,25 +41,35 @@ Three CNN architectures were evaluated across multiple training configurations (
 
 ### Architecture Comparison Summary
 
-| Model | Config | Test MAE | Test Accuracy | Parameters | Approach |
-|-------|--------|----------|---------------|------------|----------|
-| ResNet-50 | C1 | *your value* | *your value* | ~25.6M | Manual tuning |
-| ResNet-50 | C2 | *your value* | *your value* | ~25.6M | Manual tuning |
-| ResNet-50 | C3 | *your value* | *your value* | ~25.6M | Manual tuning |
-| ResNet-50 | C4 | *your value* | *your value* | ~25.6M | Manual tuning |
-| DenseNet-121 | C1 | *your value* | *your value* | ~8M | Manual tuning |
-| DenseNet-121 | C2 | *your value* | *your value* | ~8M | Manual tuning |
-| DenseNet-121 | C3 | *your value* | *your value* | ~8M | Manual tuning |
-| EfficientNet V2-B3 | KerasTuner | *your value* | *your value* | ~14M | Automated (KerasTuner) |
-| **EfficientNet V2-B3** | **C4** | ***your value*** | ***your value*** | **~14M** | **Manual tuning** |
+| Model                       | Config | Validation MAE | Validation Accuracy | Validation QWK | Parameters | Approach          |
+| --------------------------- | ------ | -------------: | ------------------: | -------------: | ---------: | ----------------- |
+| ResNet-50                   | C1     |         0.5412 |              0.5944 |         0.7239 |     ~25.6M | Manual tuning     |
+| ResNet-50                   | C2     |         0.5746 |              0.5315 |         0.7496 |     ~25.6M | Manual tuning     |
+| ResNet-50                   | C3     |         0.5629 |              0.5327 |         0.7450 |     ~25.6M | Manual tuning     |
+| ResNet-50                   | C4     |         0.5650 |              0.5327 |         0.7562 |     ~25.6M | Manual tuning     |
+| DenseNet-121                | C1     |         0.6017 |              0.5714 |         0.6670 |      ~8.0M | Manual tuning     |
+| DenseNet-121                | C2     |         0.6661 |              0.4467 |         0.6843 |      ~8.0M | Manual tuning     |
+| DenseNet-121                | C3     |         0.7066 |              0.4673 |         0.6763 |      ~8.0M | Manual tuning     |
+| Custom CNN + VGG16 Ensemble | C1     |         0.5749 |              0.6223 |         0.7340 |   ~29.3M\* | Manual tuning     |
+| Custom CNN + VGG16 Ensemble | C2     |         0.5000 |              0.6380 |         0.7415 |   ~29.3M\* | Manual tuning     |
+| EfficientNet V2-B3          | C1     |         0.4649 |              0.6562 |         0.7660 |     ~14.0M | Manual tuning     |
+| EfficientNet V2-B3          | C2     |         0.4613 |              0.6441 |         0.7660 |     ~14.0M | Manual tuning     |
+| EfficientNet V2-B3          | C3     |         0.6199 |              0.5763 |         0.6420 |     ~14.0M | Manual tuning     |
+| **EfficientNet V2-B3**      | **C4** |     **0.4431** |          **0.6489** |     **0.7841** | **~14.0M** | **Manual tuning** |
 
-> **Best Model:** EfficientNet V2-B3 Configuration 4 (C4)
+> **Best Model:** **EfficientNet V2-B3 Configuration 4 (C4)**
 
+**Final Test Set Performance**
 
+| Metric                         |               Value |
+| ------------------------------ | ------------------: |
+| Test Accuracy                  | **0.6576 (65.76%)** |
+| Balanced Accuracy              | **0.5710 (57.10%)** |
+| Mean Absolute Error (MAE)      |          **0.4130** |
+| Quadratic Weighted Kappa (QWK) |          **0.8092** |
+| Macro ROC AUC                  |          **0.8845** |
 
 ## Justification: Manual Hyperparameter Tuning over Automated Search
-
-While KerasTuner was explored for automated hyperparameter optimisation (see `EfficientNet_V2B3_KerasTuner` configuration), the final best-performing model (EfficientNet V2-B3 C4) was produced through **manual iterative tuning**. The justification is as follows:
 
 1. **Domain-informed decisions** — Medical imaging tasks benefit from practitioner intuition about augmentation intensity, dropout rates, and learning rate schedules that automated search spaces may not adequately capture. For example, aggressive augmentation that distorts joint geometry can harm OA classification but automated search treats it as just another parameter.
 
@@ -67,27 +77,66 @@ While KerasTuner was explored for automated hyperparameter optimisation (see `Ef
 
 3. **Computational efficiency** — KerasTuner requires hundreds of trial runs, each training for multiple epochs. With a dataset of this size and model complexity, the search consumed significant GPU hours while the manual approach reached a superior result in 4 targeted iterations.
 
-4. **Reproducibility and interpretability** — Each manual configuration has a clear, documented rationale. Automated search produces a result but offers limited insight into *why* that combination works, making it harder to justify in an academic context.
-
-5. **Empirical validation** — The manually-tuned C4 configuration outperformed the KerasTuner-optimised configuration on test metrics, confirming that informed manual tuning can surpass automated search when the practitioner understands the problem domain.
+4. **Reproducibility and interpretability** — Each manual configuration has a clear, documented rationale. Automated search produces a result but offers limited insight into _why_ that combination works, making it harder to justify in an academic context.
 
 ---
 
 ## Interface Design
 
-<!-- Add your screenshots below -->
+The SteadyGerak platform is divided into several key modules that guide the user from onboarding through to long-term rehabilitation tracking and follow-up diagnoses.
 
-| Screenshot | Description |
-|------------|-------------|
-| ![Dashboard](docs/screenshots/dashboard.png) | Daily Action Dashboard with SDT gamification elements |
-| ![Diagnostics](docs/screenshots/diagnostics.png) | Diagnostic Results with Grad-CAM overlay |
-| ![Probability](docs/screenshots/probability.png) | Probability Distribution (General View) |
-| ![Progression](docs/screenshots/progression.png) | Disease Progression Spectrum |
-| ![Joint Map](docs/screenshots/joint-map.png) | Interactive 3D Joint Map |
-| ![Population](docs/screenshots/population.png) | Population Comparison |
-| ![Biomechanical](docs/screenshots/biomechanical.png) | Biomechanical Breakdown Radar |
-| ![Check-in](docs/screenshots/checkin.png) | Weekly Self-Report Check-In Modal |
-| ![Chat](docs/screenshots/chat.png) | SteadyGerak AI Assistant |
+### 1. Onboarding & Authentication Flow
+
+| Screenshot                                               | Description                                                                                                            |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| ![Landing Page](dashboard_screenshot/main_dashboard.png) | **Landing Page:** Introduces the platform's AI-powered KOA severity detection and personalized rehabilitation support. |
+| ![Registration](dashboard_screenshot/registration.png)   | **Registration Page:** Account creation to access the system.                                                          |
+| ![Onboarding](dashboard_screenshot/onboarding.png)       | **Onboarding:** Multi-step health profile setup capturing biometrics, symptoms, and lifestyle data.                    |
+
+### 2. User Dashboard & Rehabilitation
+
+| Screenshot                                          | Description                                                                                                              |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| ![Dashboard](docs/screenshots/dashboard.png)        | **User Dashboard:** Daily action dashboard with SDT gamification elements (streak, XP) and daily pain check-in.          |
+| ![Clinical Exercise](docs/screenshots/exercise.png) | **Clinical Exercise Dashboard:** Specialized video-guided physiotherapy exercises tailored to the user's KL grade.       |
+| ![Recovery Analysis](docs/screenshots/recovery.png) | **Recovery & Mastery Analysis:** Longitudinal tracking of mobility and pain levels across 12-week rehabilitation cycles. |
+| ![Check-in](docs/screenshots/checkin.png)           | **Weekly Check-In:** Two-step modal for self-reporting pain (0-10) and stiffness to update rehabilitation progress.      |
+
+### 3. Diagnostics & AI Assistant
+
+| Screenshot                                       | Description                                                                                                                         |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| ![Upload Guide](docs/screenshots/upload.png)     | **X-Ray Upload:** Upload interface with validation via the Gatekeeper model to ensure valid knee X-rays.                            |
+| ![Diagnostics](docs/screenshots/diagnostics.png) | **Severity Diagnosis:** Diagnostic results featuring the predicted KL grade, confidence scores, and an adjustable Grad-CAM overlay. |
+| ![Chat](docs/screenshots/chat.png)               | **Assistant Chatbot:** RAG-powered chatbot providing contextual, personalized guidance based on physiotherapy guidelines.           |
+
+### 4. Model Evaluation (General View)
+
+| Screenshot                                           | Description                                                                                                                |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| ![Probability](docs/screenshots/probability.png)     | **Probability Distribution:** Donut chart and progress bars showing the model's confidence across all five KL grades.      |
+| ![Progression](docs/screenshots/progression.png)     | **Disease Progression:** Patient's position on the KOA progression spectrum (Healthy to Severe).                           |
+| ![Joint Map](docs/screenshots/joint-map.png)         | **Interactive 3D Joint Map:** Visualizes affected anatomical structures based on individual severity.                      |
+| ![Population](docs/screenshots/population.png)       | **Population Comparison:** Age-related prevalence data comparing the patient's severity with the OAI reference population. |
+| ![Biomechanical](docs/screenshots/biomechanical.png) | **Biomechanical Breakdown:** Radar chart analyzing structural areas (Space, Osteophytes, Sclerosis, Alignment).            |
+
+### 5. Model Evaluation (Data Analytics View)
+
+| Screenshot                                                 | Description                                                                                 |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| ![Model Overview](docs/screenshots/model-overview.png)     | **Model Overview:** Key performance metrics including Accuracy, Balanced Accuracy, and QWK. |
+| ![Confusion Matrix](docs/screenshots/confusion-matrix.png) | **Confusion Matrix:** Breakdown of correct and incorrect severity grade predictions.        |
+| ![ROC AUC](docs/screenshots/roc-auc.png)                   | **ROC AUC Curves:** Model's ability to distinguish between different severity grades.       |
+| ![Per-Class](docs/screenshots/per-class.png)               | **Per-Class Metrics:** Detailed Precision, Recall, and F1-score for each KL grade.          |
+| ![Error Analysis](docs/screenshots/error-analysis.png)     | **Prediction Error Analysis:** Insights into 1-grade and 2-grade misclassifications.        |
+
+### 6. Follow-up Diagnosis
+
+| Screenshot                                                | Description                                                                                                                                     |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Follow-up Upload](docs/screenshots/followup-upload.png) | **Follow-up Upload:** Interface for returning users to upload new X-rays for continuous monitoring.                                             |
+| ![Comparative Analysis](docs/screenshots/comparative.png) | **Comparative Analysis:** Side-by-side comparison of baseline and latest diagnostics, including Grad-CAM and KL grades.                         |
+| ![Confirmation](docs/screenshots/confirmation.png)        | **Confirmation Workflow:** Verification step ("Discard", "Review Again", "Finalize & Save") ensuring data integrity before storing to Supabase. |
 
 ---
 
@@ -95,12 +144,13 @@ While KerasTuner was explored for automated hyperparameter optimisation (see `Ef
 
 The trained model weights are too large for Git. Download from Google Drive:
 
-| Model | Purpose | Link |
-|-------|---------|------|
-| EfficientNet V2-B3 (C4) | KL Grade Prediction | [Download best_model_weights.h5](YOUR_GOOGLE_DRIVE_LINK_HERE) |
-| MobileNetV2 (Gatekeeper) | Knee X-Ray Validation | [Download gatekeeper_weights.h5](YOUR_GOOGLE_DRIVE_LINK_HERE) |
+| Model                    | Purpose               | Link                                                                                                                   |
+| ------------------------ | --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| EfficientNet V2-B3 (C4)  | KL Grade Prediction   | [Download best_model_weights.h5](https://drive.google.com/drive/folders/1V0d-JLKEHcQrLp1ubGFooeTYIB68ugYX?usp=sharing) |
+| MobileNetV2 (Gatekeeper) | Knee X-Ray Validation | [Download gatekeeper_weights.h5](https://drive.google.com/drive/folders/1V0d-JLKEHcQrLp1ubGFooeTYIB68ugYX?usp=sharing) |
 
 After downloading, place both files in:
+
 ```
 ml_workflow/best_model/
 ├── best_model_weights.h5
@@ -111,16 +161,16 @@ ml_workflow/best_model/
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
+| Layer    | Technology                                                                   |
+| -------- | ---------------------------------------------------------------------------- |
 | Frontend | React 19, TypeScript, Vite, TailwindCSS 4, Framer Motion, Recharts, Three.js |
-| Backend | Python 3.10, FastAPI, Uvicorn, SQLAlchemy |
-| ML/AI | TensorFlow 2.20+, EfficientNetV2B3, OpenCV, Grad-CAM |
-| LLM | Groq (Llama 3.3 70B) for recommendations & chat |
-| RAG | LangChain, ChromaDB, Sentence-Transformers (all-MiniLM-L6-v2) |
-| Database | PostgreSQL (Supabase) |
-| Storage | Supabase Storage (X-ray images, Grad-CAM overlays) |
-| Auth | Supabase Auth |
+| Backend  | Python 3.10, FastAPI, Uvicorn, SQLAlchemy                                    |
+| ML/AI    | TensorFlow 2.20+, EfficientNetV2B3, OpenCV, Grad-CAM                         |
+| LLM      | Groq (Llama 3.3 70B) for recommendations & chat                              |
+| RAG      | LangChain, ChromaDB, Sentence-Transformers (all-MiniLM-L6-v2)                |
+| Database | PostgreSQL (Supabase)                                                        |
+| Storage  | Supabase Storage (X-ray images, Grad-CAM overlays)                           |
+| Auth     | Supabase Auth                                                                |
 
 ---
 
@@ -190,6 +240,7 @@ python main.py
 ```
 
 The API will be available at `http://localhost:8000`. Verify with:
+
 ```
 GET http://localhost:8000/health
 ```
@@ -271,30 +322,30 @@ FinalYearProject/
 
 ### Backend (Python)
 
-| Library | Version | Purpose |
-|---------|---------|---------|
-| fastapi | latest | REST API framework |
-| tensorflow | ≥2.20.0 | Deep learning inference |
-| opencv-python | latest | Image preprocessing (CLAHE, resize) |
-| numpy | ≥1.26.0 | Array operations |
-| langchain | latest | RAG pipeline orchestration |
-| chromadb | latest | Vector database for RAG |
-| sentence-transformers | latest | Document embedding (all-MiniLM-L6-v2) |
-| sqlalchemy | latest | Database ORM |
-| psycopg2-binary | latest | PostgreSQL driver |
-| groq | latest | LLM API client (Llama 3.3 70B) |
+| Library               | Version | Purpose                               |
+| --------------------- | ------- | ------------------------------------- |
+| fastapi               | latest  | REST API framework                    |
+| tensorflow            | ≥2.20.0 | Deep learning inference               |
+| opencv-python         | latest  | Image preprocessing (CLAHE, resize)   |
+| numpy                 | ≥1.26.0 | Array operations                      |
+| langchain             | latest  | RAG pipeline orchestration            |
+| chromadb              | latest  | Vector database for RAG               |
+| sentence-transformers | latest  | Document embedding (all-MiniLM-L6-v2) |
+| sqlalchemy            | latest  | Database ORM                          |
+| psycopg2-binary       | latest  | PostgreSQL driver                     |
+| groq                  | latest  | LLM API client (Llama 3.3 70B)        |
 
 ### Frontend (TypeScript/React)
 
-| Library | Version | Purpose |
-|---------|---------|---------|
-| react | 19.x | UI framework |
-| vite | 8.x | Build tool |
-| tailwindcss | 4.x | Utility-first CSS |
-| framer-motion | 12.x | Animations & transitions |
-| recharts | 3.x | Data visualisation (charts) |
-| three / @react-three/fiber | latest | 3D knee joint visualisation |
-| @supabase/supabase-js | 2.x | Auth, DB, and storage client |
+| Library                    | Version | Purpose                      |
+| -------------------------- | ------- | ---------------------------- |
+| react                      | 19.x    | UI framework                 |
+| vite                       | 8.x     | Build tool                   |
+| tailwindcss                | 4.x     | Utility-first CSS            |
+| framer-motion              | 12.x    | Animations & transitions     |
+| recharts                   | 3.x     | Data visualisation (charts)  |
+| three / @react-three/fiber | latest  | 3D knee joint visualisation  |
+| @supabase/supabase-js      | 2.x     | Auth, DB, and storage client |
 
 ---
 
@@ -307,5 +358,5 @@ This project was developed as a Final Year Project at Asia Pacific University of
 ## Author
 
 **Owen Tsang** — TP071168  
-BSc (Hons) in ______  
+BSc (Hons) in Computer Science with data analytics  
 Asia Pacific University of Technology & Innovation
