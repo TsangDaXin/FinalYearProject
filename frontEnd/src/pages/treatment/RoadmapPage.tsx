@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface RoadmapPageProps {
-  onNavigate: (view: 'action_dashboard' | 'routine' | 'mastery' | 'care_network' | 'roadmap' | 'profile') => void;
+  onNavigate: (view: 'action_dashboard' | 'routine' | 'mastery' | 'care_network' | 'roadmap' | 'profile' | 'diagnostics') => void;
   severityGrade?: string;
   userName?: string;
 }
@@ -110,7 +110,7 @@ export default function RoadmapPage({ onNavigate, severityGrade = 'Severe', user
   };
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 200, damping: 20 } },
+    show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 200, damping: 20 } },
   };
 
   return (

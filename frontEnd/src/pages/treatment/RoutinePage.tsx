@@ -6,7 +6,7 @@ import { supabase } from '../../lib/supabase';
 
 interface RoutinePageProps {
   patientKLGrade: string;
-  onNavigate: (view: 'action_dashboard' | 'routine' | 'mastery' | 'care_network' | 'roadmap' | 'profile') => void;
+  onNavigate: (view: 'action_dashboard' | 'routine' | 'mastery' | 'care_network' | 'roadmap' | 'profile' | 'diagnostics') => void;
   userName?: string;
 }
 
@@ -52,7 +52,7 @@ function getRoutineDescription(grade: string): string {
 
 // ─── AI Exercise Guidance ─────────────────────────────────────────────────────
 
-function getExerciseGuide(videoTitle: string, grade: string): { sets: number; reps: string; restSeconds: number; instructions: string[] } {
+function getExerciseGuide(_videoTitle: string, grade: string): { sets: number; reps: string; restSeconds: number; instructions: string[] } {
   const num = getKLGradeNumber(grade);
   if (num <= 2) {
     return {
@@ -134,7 +134,7 @@ export default function RoutinePage({ patientKLGrade, onNavigate, userName = 'Gu
   const [activeModalVideoIdx, setActiveModalVideoIdx] = useState<number | null>(null);
   const [timerSeconds, setTimerSeconds] = useState(300);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, _setIsMuted] = useState(false);
   const [completedVideos, setCompletedVideos] = useState<Set<number>>(new Set());
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -143,7 +143,7 @@ export default function RoutinePage({ patientKLGrade, onNavigate, userName = 'Gu
   const [userXP, setUserXP] = useState(0);
   const [xpAnimating, setXpAnimating] = useState(false);
   const [weeklyLocked, setWeeklyLocked] = useState(false);
-  const [daysUntilUnlock, setDaysUntilUnlock] = useState(0);
+  const [_daysUntilUnlock, setDaysUntilUnlock] = useState(0);
 
   // ── Tier System ──────────────────────────────────────────────────────────────
   const TIERS = [
@@ -204,7 +204,7 @@ export default function RoutinePage({ patientKLGrade, onNavigate, userName = 'Gu
   };
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 20 } },
+    show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 260, damping: 20 } },
   };
 
   // ── YouTube API Fetch ────────────────────────────────────────────────────────

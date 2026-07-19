@@ -1,4 +1,4 @@
-﻿import { useState, useRef, useEffect, lazy, Suspense, useCallback } from 'react';
+import { useState, useRef, useEffect, lazy, Suspense, useCallback } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -247,7 +247,7 @@ export default function DiagnosticResults({ data, onInitializeDashboard }: Diagn
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
@@ -1553,8 +1553,8 @@ export default function DiagnosticResults({ data, onInitializeDashboard }: Diagn
                             <Tooltip
                               contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }}
                               itemStyle={{ color: '#e0e0e0' }}
-                              labelFormatter={(v: number) => `FPR: ${v.toFixed(2)}`}
-                              formatter={(value: number) => value.toFixed(3)}
+                              labelFormatter={(v: any) => `FPR: ${Number(v).toFixed(2)}`}
+                              formatter={(value: any) => Number(value).toFixed(3)}
                             />
                             <Legend
                               verticalAlign="top"
@@ -1675,7 +1675,7 @@ export default function DiagnosticResults({ data, onInitializeDashboard }: Diagn
                             <CartesianGrid strokeDasharray="3 3" stroke="#424754" opacity={0.2} vertical={false} />
                             <XAxis dataKey="grade" tick={{ fill: '#9ca3af', fontSize: 10 }} axisLine={{ stroke: '#424754' }} tickLine={false} />
                             <YAxis tick={{ fill: '#9ca3af', fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} domain={[0, 100]} />
-                            <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }} itemStyle={{ color: '#e0e0e0' }} formatter={(value: number) => `${value}%`} />
+                            <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }} itemStyle={{ color: '#e0e0e0' }} formatter={(value: any) => `${value}%`} />
                             <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '12px' }} />
                             <Bar dataKey="precision" name="Precision" fill="#3B82F6" radius={[4, 4, 0, 0]} maxBarSize={28} />
                             <Bar dataKey="recall" name="Recall" fill="#06D6A0" radius={[4, 4, 0, 0]} maxBarSize={28} />
@@ -1757,7 +1757,7 @@ export default function DiagnosticResults({ data, onInitializeDashboard }: Diagn
                             <CartesianGrid strokeDasharray="3 3" stroke="#424754" opacity={0.2} vertical={false} />
                             <XAxis dataKey="error" tick={{ fill: '#9ca3af', fontSize: 10 }} axisLine={{ stroke: '#424754' }} tickLine={false} />
                             <YAxis tick={{ fill: '#9ca3af', fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} domain={[0, 70]} />
-                            <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }} itemStyle={{ color: '#e0e0e0' }} labelStyle={{ color: '#FF6D29', fontWeight: 'bold' }} formatter={(value: number, _name: string, props: any) => [`${value}% (${props.payload.count} images)`, 'Frequency']} />
+                            <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }} itemStyle={{ color: '#e0e0e0' }} labelStyle={{ color: '#FF6D29', fontWeight: 'bold' }} formatter={(value: any, _name: any, props: any) => [`${value}% (${props.payload.count} images)`, 'Frequency']} />
                             <Bar dataKey="percent" radius={[6, 6, 0, 0]} maxBarSize={60}>
                               {[
                                 { color: '#06D6A0' },
@@ -1877,7 +1877,7 @@ export default function DiagnosticResults({ data, onInitializeDashboard }: Diagn
                                     <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
                                   ))}
                                 </Pie>
-                                <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '12px' }} itemStyle={{ color: '#e0e0e0' }} formatter={(value: number) => `${value}%`} />
+                                <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '12px' }} itemStyle={{ color: '#e0e0e0' }} formatter={(value: any) => `${value}%`} />
                               </PieChart>
                             </ResponsiveContainer>
                             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
@@ -1990,7 +1990,7 @@ export default function DiagnosticResults({ data, onInitializeDashboard }: Diagn
                               <Tooltip
                                 contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '12px' }}
                                 itemStyle={{ color: '#e0e0e0' }}
-                                formatter={(value: number) => [`${value}%`, 'Confidence']}
+                                formatter={(value: any) => [`${value}%`, 'Confidence']}
                                 labelStyle={{ color: '#FF6D29', fontWeight: 'bold' }}
                               />
                               <ReferenceLine
@@ -2181,7 +2181,7 @@ export default function DiagnosticResults({ data, onInitializeDashboard }: Diagn
                                   <Tooltip
                                     contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }}
                                     itemStyle={{ color: '#e0e0e0' }}
-                                    formatter={(_value: number, _name: string, props: any) => [
+                                    formatter={(_value: any, _name: any, props: any) => [
                                       `${props.payload.percent}% of the reference population (n=8,892 knees) fall in this grade`,
                                       props.payload.fullGrade
                                     ]}
@@ -2289,7 +2289,7 @@ export default function DiagnosticResults({ data, onInitializeDashboard }: Diagn
                                   <PolarAngleAxis dataKey="dimension" tick={{ fill: '#e0e0e0', fontSize: 11, fontWeight: 600 }} />
                                   <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fill: '#9ca3af', fontSize: 9 }} axisLine={false} tickCount={5} />
                                   <Radar name="Severity" dataKey="score" stroke="#FF6D29" fill="#FF6D29" fillOpacity={0.25} strokeWidth={2} dot={{ fill: '#FF6D29', strokeWidth: 0, r: 4 }} />
-                                  <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }} formatter={(value: number) => [`${value}/100 severity`]} />
+                                  <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }} formatter={(value: any) => [`${value}/100 severity`]} />
                                 </RadarChart>
                               </ResponsiveContainer>
                             );

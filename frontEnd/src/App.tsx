@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import type { FormEvent } from 'react'
+
 import Onboarding from './pages/onboarding/Onboarding'
 import SymptomsAssessment from './pages/assessment/SymptomsAssessment'
 import BehavioralLifestyle from './pages/assessment/BehavioralLifestyle'
 import DiagnosticsUpload from './pages/diagnostics/DiagnosticsUpload'
 import DiagnosticResults from './pages/diagnostics/DiagnosticResults'
-import type { DiagnosticData } from './pages/DiagnosticResults'
+import type { DiagnosticData } from './pages/diagnostics/DiagnosticResults'
 import LoadingScreen from './pages/onboarding/LoadingScreen'
 
 import DailyActionDashboard from './pages/dashboard/DailyActionDashboard'
@@ -29,17 +29,8 @@ function App() {
   const [onboardingData, setOnboardingData] = useState<Record<string, any>>({})
   const [userId, setUserId] = useState<string | null>(null)
   
-  const [authType, setAuthType] = useState<'signin' | 'signup'>('signin')
   const [fullName, setFullName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [remember, setRemember] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
-  const [showRedirectToast, setShowRedirectToast] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [error, setError] = useState('')
 
   // Trigger fade-in on mount
   useEffect(() => {

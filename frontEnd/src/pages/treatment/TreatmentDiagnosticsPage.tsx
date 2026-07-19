@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { RadialGlowBackground } from '../../components/ui/radial-glow-background';
+
 import GeometricBackground from '../../components/ui/geometric';
 import type { DiagnosticData } from '../diagnostics/DiagnosticResults';
 import DiagnosticsUploadGuidelinesModal from '../diagnostics/DiagnosticsUploadGuidelinesModal';
@@ -15,7 +15,7 @@ interface TreatmentDiagnosticsPageProps {
   userName?: string;
 }
 
-export default function TreatmentDiagnosticsPage({ onNavigate, userStreak = 0, completedCheckInWeeks = 0, previousResult, onNewResult, userName = 'Guest' }: TreatmentDiagnosticsPageProps) {
+export default function TreatmentDiagnosticsPage({ onNavigate, userStreak: _userStreak = 0, completedCheckInWeeks = 0, previousResult, onNewResult, userName = 'Guest' }: TreatmentDiagnosticsPageProps) {
   // Cycle-based eligibility: user needs 12 weekly check-ins since their last follow-up scan.
   // If no follow-up exists, falls back to total check-ins >= 12.
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -196,7 +196,6 @@ export default function TreatmentDiagnosticsPage({ onNavigate, userStreak = 0, c
     setUploadedFile(file); // Store file for confirm phase
     
     // Capture previous data snapshot before any changes
-    const prevSnapshot = previousResult ? { ...previousResult } : null;
     
     const formData = new FormData();
     formData.append('file', file);

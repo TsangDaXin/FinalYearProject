@@ -8,13 +8,8 @@ import {
   CheckCircle,
   Clock, 
   ArrowRight,
-  Sparkles,
-  Server,
-  Layers,
-  Database
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GradientBarsBackground } from "../../../components/ui/gradient-bars-background";
 
 interface FeatureDetail {
   title: string;

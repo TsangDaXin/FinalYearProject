@@ -21,7 +21,7 @@ interface ProfileData {
 
 export default function ProfilePage({ onNavigate }: ProfilePageProps) {
   const [profile, setProfile] = useState<ProfileData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [_loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [userEmail, setUserEmail] = useState('');
@@ -156,7 +156,7 @@ export default function ProfilePage({ onNavigate }: ProfilePageProps) {
 
   // Animation
   const containerVariants = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.1 } } };
-  const itemVariants = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 20 } } };
+  const itemVariants = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 260, damping: 20 } } };
 
   return (
     <div className="font-sans bg-[#131315] text-white min-h-screen selection:bg-[#FF6D29] selection:text-white relative overflow-hidden">

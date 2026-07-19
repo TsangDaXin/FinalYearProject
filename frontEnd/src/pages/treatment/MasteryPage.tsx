@@ -9,12 +9,12 @@ interface MasteryPageProps {
   userStreak?: number;
   severityGrade?: string;
   onboardingDate?: string | null;
-  onNavigate: (view: 'action_dashboard' | 'routine' | 'mastery' | 'care_network' | 'roadmap' | 'profile') => void;
+  onNavigate: (view: 'action_dashboard' | 'routine' | 'mastery' | 'care_network' | 'roadmap' | 'profile' | 'diagnostics') => void;
   userName?: string;
   userId?: string | null;
 }
 
-export default function MasteryPage({ userStreak = 0, severityGrade = 'Moderate', onboardingDate, onNavigate, userName = 'Guest', userId = null }: MasteryPageProps) {
+export default function MasteryPage({ userStreak = 0, onboardingDate, onNavigate, userName = 'Guest', userId = null }: MasteryPageProps) {
   // Time filter state
   const [timeFilter, setTimeFilter] = React.useState<'weekly' | '3-week' | 'monthly'>('weekly');
   // Cycle selector for multi-scan progression
@@ -22,7 +22,7 @@ export default function MasteryPage({ userStreak = 0, severityGrade = 'Moderate'
 
   // ── Real-time chart data from database ─────────────────────────────────────
   const [rawChartData, setRawChartData] = React.useState<{ week: number; mobility: number | null; pain: number | null; stiffness: number | null; notes: string | null }[]>([]);
-  const [isLoadingChart, setIsLoadingChart] = React.useState(false);
+  const [_isLoadingChart, setIsLoadingChart] = React.useState(false);
   const [showHistory, setShowHistory] = React.useState(false);
   const [historyCycle, setHistoryCycle] = React.useState(0);
   const [showCheckinReminder, setShowCheckinReminder] = React.useState(false);
@@ -103,12 +103,7 @@ export default function MasteryPage({ userStreak = 0, severityGrade = 'Moderate'
 
   const masteryDesc = getMasteryDescription();
 
-  // Dynamic Trajectory Generation — uses REAL database data when available
-  const kMap: Record<string, number> = { Healthy: 0, Doubtful: 1, Minimal: 2, Moderate: 3, Severe: 4 };
-  const k = kMap[severityGrade] ?? 3;
-  
-  const baseMobility = 90 - (k * 15);
-  const basePain = 10 + (k * 20);
+
   
   const chartData = React.useMemo(() => {
     // Use only real data from the database
@@ -182,7 +177,7 @@ export default function MasteryPage({ userStreak = 0, severityGrade = 'Moderate'
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 260,
         damping: 20
       }

@@ -16,9 +16,7 @@ export default function LandingPage({ onLoginClick }: LandingPageProps) {
   // References for scrolling
   const sandboxRef = useRef<HTMLDivElement>(null);
 
-  const handleOpenSandbox = () => {
-    sandboxRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+
 
   return (
     <div className="min-h-screen bg-[#161316] text-gray-200 antialiased selection:bg-[#FF6D29] selection:text-white">

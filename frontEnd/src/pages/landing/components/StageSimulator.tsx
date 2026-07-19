@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Sliders, CheckCircle2, TrendingUp, Sparkles } from "lucide-react";
+import { Sliders, CheckCircle2, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import type { KlStageDetails } from "../types";
-import { BentoGrid, type BentoItem } from "../../../components/ui/bento-grid";
+import { BentoGrid } from "../../../components/ui/bento-grid";
 
 const stageDetails: KlStageDetails[] = [
   {

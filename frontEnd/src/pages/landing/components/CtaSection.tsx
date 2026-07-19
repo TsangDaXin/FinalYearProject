@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, Sparkles, Activity, ShieldAlert } from "lucide-react";
+import { Sparkles, Activity, ShieldAlert } from "lucide-react";
 import { GradientBarsBackground } from "../../../components/ui/gradient-bars-background";
 
 import { StartAnalyzingButton } from "./Hero";

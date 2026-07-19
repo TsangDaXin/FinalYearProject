@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 import { Button } from "./button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./card";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 /**
  * Props for the AuthForm component.
