@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 import { ArrowRight, Code2, Copy, Rocket, Zap } from 'lucide-react';
 import { useState } from 'react';
 
@@ -223,7 +223,7 @@ export default function CardFlip({
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes slideIn {
           0% {
             transform: translateX(-100px);

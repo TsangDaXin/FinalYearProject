@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AuthForm } from '../../components/ui/sign-in-1'
-import { Mail, User, Globe, ArrowLeft } from 'lucide-react'
+import { Mail, User, ArrowLeft } from 'lucide-react'
 import { Input } from '../../components/ui/input'
 import { Label } from '../../components/ui/label'
 import { supabase } from '../../lib/supabase'
@@ -15,25 +15,6 @@ export default function AuthPage({ onAuthSuccess, onSkip, mounted }: AuthPagePro
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
   const [showRedirectToast, setShowRedirectToast] = useState(false)
   const [mode, setMode] = useState<'signin' | 'signup'>('signin')
-
-  const handleGoogleLogin = async () => {
-    if (submitStatus !== 'idle') return
-    setSubmitStatus('submitting')
-    
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        // Redirects back to the root (or current page) after login
-        redirectTo: window.location.origin,
-      }
-    })
-
-    if (error) {
-      console.error('Error logging in with Google:', error.message)
-      setSubmitStatus('idle')
-    }
-    // Note: Success state is handled automatically by page redirect
-  }
 
   const handleEmailSignUp = async () => {
     if (submitStatus !== 'idle') return

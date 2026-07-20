@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Play, Pause, RotateCcw, Volume2, Maximize, Activity, Sparkles, MessageSquare, Compass } from "lucide-react";
+import { Play, Pause, RotateCcw, Volume2, Maximize, Activity } from "lucide-react";
 import { motion } from "framer-motion";
 import { LampContainer } from "../../../components/ui/lamp";
 
@@ -7,10 +7,10 @@ export function InteractivePlayer() {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(34); // starts at 4:22 (34% of 12:45)
   const [activeFrequency, setActiveFrequency] = useState<number>(340);
-  const [peakingDb, setPeakingDb] = useState<number>(72);
+  const [_peakingDb, setPeakingDb] = useState<number>(72);
   const [scanPosition, setScanPosition] = useState<number>(40);
   
-  const simulationTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const simulationTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (isPlaying) {

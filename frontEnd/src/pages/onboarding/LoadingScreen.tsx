@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, animate, useMotionValue, useTransform } from 'framer-motion'
 import BoxLoader from '../../components/ui/box-loader'
 import { GradientBackground } from '../../components/ui/paper-design-shader-background'

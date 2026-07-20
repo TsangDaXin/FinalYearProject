@@ -36,20 +36,7 @@ export default function DiagnosticsUploadGuidelinesModal({ isOpen, onClose }: Di
     }
   };
 
-  const renderGuidelineText = () => {
-    switch (currentStep) {
-      case 1:
-        return "Welcome to the SteadyGerak X-Ray Analysis module. Please follow the upcoming guidelines closely to ensure our AI can provide the most accurate diagnostic results.";
-      case 2:
-        return "Guideline 1: The image should be well-lit and in focus. Avoid glare or reflections if taking a photo of a physical film.";
-      case 3:
-        return "Guideline 2: Please crop or hide any personal identifiable information (like names or patient IDs) before uploading.";
-      case 4:
-        return "Guideline 3: Only upload X-ray images. Our AI is specifically trained on knee radiographs and will not process MRI or CT scans.";
-      default:
-        return "";
-    }
-  };
+
 
   return (
     <AnimatePresence>

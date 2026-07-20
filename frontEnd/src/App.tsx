@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import type { FormEvent } from 'react'
+
 import Onboarding from './pages/onboarding/Onboarding'
 import SymptomsAssessment from './pages/assessment/SymptomsAssessment'
 import BehavioralLifestyle from './pages/assessment/BehavioralLifestyle'
 import DiagnosticsUpload from './pages/diagnostics/DiagnosticsUpload'
 import DiagnosticResults from './pages/diagnostics/DiagnosticResults'
-import type { DiagnosticData } from './pages/DiagnosticResults'
+import type { DiagnosticData } from './pages/diagnostics/DiagnosticResults'
 import LoadingScreen from './pages/onboarding/LoadingScreen'
 
 import DailyActionDashboard from './pages/dashboard/DailyActionDashboard'
@@ -29,17 +29,8 @@ function App() {
   const [onboardingData, setOnboardingData] = useState<Record<string, any>>({})
   const [userId, setUserId] = useState<string | null>(null)
   
-  const [authType, setAuthType] = useState<'signin' | 'signup'>('signin')
   const [fullName, setFullName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [remember, setRemember] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
-  const [showRedirectToast, setShowRedirectToast] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [error, setError] = useState('')
 
   // Trigger fade-in on mount
   useEffect(() => {
@@ -113,7 +104,24 @@ function App() {
       setCurrentView('diagnostics')
       return null
     }
-    return <DiagnosticResults data={diagnosticResult} onInitializeDashboard={() => setCurrentView('action_dashboard')} />
+    return <DiagnosticResults data={diagnosticResult} onInitializeDashboard={async () => {
+      // Ensure userId and onboardingDate are hydrated for new sign-ups
+      if (!userId || !onboardingDate) {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session?.user) {
+          if (!userId) setUserId(session.user.id)
+          if (!onboardingDate) {
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('onboarding_date')
+              .eq('id', session.user.id)
+              .single()
+            if (profile?.onboarding_date) setOnboardingDate(profile.onboarding_date)
+          }
+        }
+      }
+      setCurrentView('action_dashboard')
+    }} />
   }
 
   if (currentView === 'action_dashboard') {
@@ -178,11 +186,16 @@ function App() {
         <AuthPage 
           onAuthSuccess={async (type, name) => {
             if (name) setFullName(name)
+
+            // Always set userId regardless of signin/signup
+            const { data: { session: authSession } } = await supabase.auth.getSession()
+            if (authSession?.user) {
+              setUserId(authSession.user.id)
+            }
             
             if (type === 'signin') {
               const { data: { session } } = await supabase.auth.getSession()
               if (session?.user) {
-                setUserId(session.user.id)
                 const { data: profile } = await supabase
                   .from('profiles')
                   .select('kl_grade, streak_current, onboarding_date, xray_image_url, gradcam_image_url, probability_distribution, confidence_score')

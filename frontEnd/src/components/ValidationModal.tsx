@@ -95,7 +95,7 @@ export default function ValidationModal({ isOpen, onClose, data }: ValidationMod
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart><Pie data={pieData} cx="50%" cy="50%" innerRadius={60} outerRadius={95} paddingAngle={4} dataKey="value" stroke="#131315" strokeWidth={2}>
                           {pieData.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}
-                        </Pie><Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }} formatter={(v: number) => `${v}%`} /></PieChart>
+                        </Pie><Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '11px' }} formatter={(v: any) => `${v}%`} /></PieChart>
                       </ResponsiveContainer>
                       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                         <span className="text-xl font-bold text-white">{data.topConfidence}%</span>

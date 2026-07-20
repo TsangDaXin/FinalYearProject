@@ -1,14 +1,7 @@
 "use client";
 
 import { cn } from "../../lib/utils";
-import {
-    CheckCircle,
-    Clock,
-    Star,
-    TrendingUp,
-    Video,
-    Globe,
-} from "lucide-react";
+
 
 export interface BentoItem {
     title: string;

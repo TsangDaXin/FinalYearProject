@@ -1,6 +1,6 @@
 import { Play, Clipboard, Layers, CheckCircle2, Send } from "lucide-react";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ContainerScroll } from "../../../components/ui/container-scroll-animation";
 import { PaperDesignBackground } from "../../../components/ui/neon-dither";
 import { Liquid } from "../../../components/ui/button-1";

@@ -13,7 +13,7 @@ interface DashboardProps {
   confidenceDistribution: { grade: string; score: number }[];
   userStreak?: number;
   onboardingDate?: string | null;
-  onNavigate: (view: 'action_dashboard' | 'routine' | 'mastery' | 'care_network' | 'roadmap' | 'profile') => void;
+  onNavigate: (view: 'action_dashboard' | 'routine' | 'mastery' | 'care_network' | 'roadmap' | 'profile' | 'diagnostics') => void;
 }
 
 interface YouTubeVideo {
@@ -36,7 +36,7 @@ function getYouTubeQuery(grade: string): string {
   return 'knee osteoarthritis gentle seated mobility exercises -impact';
 }
 
-export default function DailyActionDashboard({ userName = "Guest", imageUrl, severityGrade, topConfidence, confidenceDistribution, userStreak = 0, onboardingDate, onNavigate }: DashboardProps) {
+export default function DailyActionDashboard({ userName = "Guest", imageUrl, severityGrade, confidenceDistribution, userStreak = 0, onboardingDate, onNavigate }: DashboardProps) {
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
   const [loadingVideos, setLoadingVideos] = useState(true);
 
@@ -195,7 +195,7 @@ export default function DailyActionDashboard({ userName = "Guest", imageUrl, sev
 
   // Animation variants
   const containerVariants = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.12 } } };
-  const itemVariants = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 20 } } };
+  const itemVariants = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 260, damping: 20 } } };
 
   return (
     <div className="font-sans bg-[#131315] text-white min-h-screen selection:bg-[#FF6D29] selection:text-white relative overflow-hidden">
@@ -344,7 +344,7 @@ export default function DailyActionDashboard({ userName = "Guest", imageUrl, sev
                             <Cell key={`cell-${index}`} fill={GRADE_COLORS[_entry.name] || '#FF6D29'} />
                           ))}
                         </Pie>
-                        <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '12px' }} itemStyle={{ color: '#e0e0e0' }} formatter={(value: number) => `${value}%`} />
+                        <Tooltip contentStyle={{ backgroundColor: '#1b1b1d', border: '1px solid #424754', borderRadius: '8px', fontSize: '12px' }} itemStyle={{ color: '#e0e0e0' }} formatter={(value: any) => `${value}%`} />
                       </PieChart>
                     </ResponsiveContainer>
                   </div>
