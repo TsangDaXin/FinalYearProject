@@ -91,52 +91,52 @@ The SteadyGerak platform is divided into several key modules that guide the user
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | ![Landing Page](dashboard_screenshot/main_dashboard.png) | **Landing Page:** Introduces the platform's AI-powered KOA severity detection and personalized rehabilitation support. |
 | ![Registration](dashboard_screenshot/registration.png)   | **Registration Page:** Account creation to access the system.                                                          |
-| ![Onboarding](dashboard_screenshot/onboarding.png)       | **Onboarding:** Multi-step health profile setup capturing biometrics, symptoms, and lifestyle data.                    |
+| ![Onboarding](dashboard_screenshot/onboarding1.png)       | **Onboarding:** Multi-step health profile setup capturing biometrics, symptoms, and lifestyle data.                    |
 
 ### 2. User Dashboard & Rehabilitation
 
 | Screenshot                                          | Description                                                                                                              |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| ![Dashboard](docs/screenshots/dashboard.png)        | **User Dashboard:** Daily action dashboard with SDT gamification elements (streak, XP) and daily pain check-in.          |
-| ![Clinical Exercise](docs/screenshots/exercise.png) | **Clinical Exercise Dashboard:** Specialized video-guided physiotherapy exercises tailored to the user's KL grade.       |
-| ![Recovery Analysis](docs/screenshots/recovery.png) | **Recovery & Mastery Analysis:** Longitudinal tracking of mobility and pain levels across 12-week rehabilitation cycles. |
-| ![Check-in](docs/screenshots/checkin.png)           | **Weekly Check-In:** Two-step modal for self-reporting pain (0-10) and stiffness to update rehabilitation progress.      |
+| ![Dashboard](dashboard_screenshot/dashboard.png)        | **User Dashboard:** Daily action dashboard with SDT gamification elements (streak, XP) and daily pain check-in.          |
+| ![Clinical Exercise](dashboard_screenshot/exercise.png) | **Clinical Exercise Dashboard:** Specialized video-guided physiotherapy exercises tailored to the user's KL grade.       |
+| ![Recovery Analysis](dashboard_screenshot/recovery.png) | **Recovery & Mastery Analysis:** Longitudinal tracking of mobility and pain levels across 12-week rehabilitation cycles. |
+| ![Check-in](dashboard_screenshot/checkin.png)           | **Weekly Check-In:** Two-step modal for self-reporting pain (0-10) and stiffness to update rehabilitation progress.      |
 
 ### 3. Diagnostics & AI Assistant
 
 | Screenshot                                       | Description                                                                                                                         |
 | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| ![Upload Guide](docs/screenshots/upload.png)     | **X-Ray Upload:** Upload interface with validation via the Gatekeeper model to ensure valid knee X-rays.                            |
-| ![Diagnostics](docs/screenshots/diagnostics.png) | **Severity Diagnosis:** Diagnostic results featuring the predicted KL grade, confidence scores, and an adjustable Grad-CAM overlay. |
-| ![Chat](docs/screenshots/chat.png)               | **Assistant Chatbot:** RAG-powered chatbot providing contextual, personalized guidance based on physiotherapy guidelines.           |
+| ![Upload Guide](dashboard_screenshot/upload.png)     | **X-Ray Upload:** Upload interface with validation via the Gatekeeper model to ensure valid knee X-rays.                            |
+| ![Diagnostics](dashboard_screenshot/diagnostics.png) | **Severity Diagnosis:** Diagnostic results featuring the predicted KL grade, confidence scores, and an adjustable Grad-CAM overlay. |
+| ![Chat](dashboard_screenshot/chat.png)               | **Assistant Chatbot:** RAG-powered chatbot providing contextual, personalized guidance based on physiotherapy guidelines.           |
 
 ### 4. Model Evaluation (General View)
 
 | Screenshot                                           | Description                                                                                                                |
 | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| ![Probability](docs/screenshots/probability.png)     | **Probability Distribution:** Donut chart and progress bars showing the model's confidence across all five KL grades.      |
-| ![Progression](docs/screenshots/progression.png)     | **Disease Progression:** Patient's position on the KOA progression spectrum (Healthy to Severe).                           |
-| ![Joint Map](docs/screenshots/joint-map.png)         | **Interactive 3D Joint Map:** Visualizes affected anatomical structures based on individual severity.                      |
-| ![Population](docs/screenshots/population.png)       | **Population Comparison:** Age-related prevalence data comparing the patient's severity with the OAI reference population. |
-| ![Biomechanical](docs/screenshots/biomechanical.png) | **Biomechanical Breakdown:** Radar chart analyzing structural areas (Space, Osteophytes, Sclerosis, Alignment).            |
+| ![Probability](dashboard_screenshot/probability.png)     | **Probability Distribution:** Donut chart and progress bars showing the model's confidence across all five KL grades.      |
+| ![Progression](dashboard_screenshot/progression.png)     | **Disease Progression:** Patient's position on the KOA progression spectrum (Healthy to Severe).                           |
+| ![Joint Map](dashboard_screenshot/joint-map.png)         | **Interactive 3D Joint Map:** Visualizes affected anatomical structures based on individual severity.                      |
+| ![Population](dashboard_screenshot/population.png)       | **Population Comparison:** Age-related prevalence data comparing the patient's severity with the OAI reference population. |
+| ![Biomechanical](dashboard_screenshot/biomechanical.png) | **Biomechanical Breakdown:** Radar chart analyzing structural areas (Space, Osteophytes, Sclerosis, Alignment).            |
 
 ### 5. Model Evaluation (Data Analytics View)
 
 | Screenshot                                                 | Description                                                                                 |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| ![Model Overview](docs/screenshots/model-overview.png)     | **Model Overview:** Key performance metrics including Accuracy, Balanced Accuracy, and QWK. |
-| ![Confusion Matrix](docs/screenshots/confusion-matrix.png) | **Confusion Matrix:** Breakdown of correct and incorrect severity grade predictions.        |
-| ![ROC AUC](docs/screenshots/roc-auc.png)                   | **ROC AUC Curves:** Model's ability to distinguish between different severity grades.       |
-| ![Per-Class](docs/screenshots/per-class.png)               | **Per-Class Metrics:** Detailed Precision, Recall, and F1-score for each KL grade.          |
-| ![Error Analysis](docs/screenshots/error-analysis.png)     | **Prediction Error Analysis:** Insights into 1-grade and 2-grade misclassifications.        |
+| ![Model Overview](dashboard_screenshot/model-overview.png)     | **Model Overview:** Key performance metrics including Accuracy, Balanced Accuracy, and QWK. |
+| ![Confusion Matrix](dashboard_screenshot/confusion-matrix.png) | **Confusion Matrix:** Breakdown of correct and incorrect severity grade predictions.        |
+| ![ROC AUC](dashboard_screenshot/roc-auc.png)                   | **ROC AUC Curves:** Model's ability to distinguish between different severity grades.       |
+| ![Per-Class](dashboard_screenshot/per-class.png)               | **Per-Class Metrics:** Detailed Precision, Recall, and F1-score for each KL grade.          |
+| ![Error Analysis](dashboard_screenshot/error-analysis.png)     | **Prediction Error Analysis:** Insights into 1-grade and 2-grade misclassifications.        |
 
 ### 6. Follow-up Diagnosis
 
 | Screenshot                                                | Description                                                                                                                                     |
 | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Follow-up Upload](docs/screenshots/followup-upload.png) | **Follow-up Upload:** Interface for returning users to upload new X-rays for continuous monitoring.                                             |
-| ![Comparative Analysis](docs/screenshots/comparative.png) | **Comparative Analysis:** Side-by-side comparison of baseline and latest diagnostics, including Grad-CAM and KL grades.                         |
-| ![Confirmation](docs/screenshots/confirmation.png)        | **Confirmation Workflow:** Verification step ("Discard", "Review Again", "Finalize & Save") ensuring data integrity before storing to Supabase. |
+| ![Follow-up Upload](dashboard_screenshot/followup-upload.png) | **Follow-up Upload:** Interface for returning users to upload new X-rays for continuous monitoring.                                             |
+| ![Comparative Analysis](dashboard_screenshot/comparative.png) | **Comparative Analysis:** Side-by-side comparison of baseline and latest diagnostics, including Grad-CAM and KL grades.                         |
+| ![Confirmation](dashboard_screenshot/confirmation.png)        | **Confirmation Workflow:** Verification step ("Discard", "Review Again", "Finalize & Save") ensuring data integrity before storing to Supabase. |
 
 ---
 
@@ -156,6 +156,19 @@ ml_workflow/best_model/
 ├── best_model_weights.h5
 └── gatekeeper_weights.h5
 ```
+
+---
+
+## Model Training Environment
+
+The model training process was accelerated using **NVIDIA CUDA** within a **Docker container** environment to ensure consistency and reproduce dependencies seamlessly.
+
+If you wish to train the model from scratch again:
+1. Ensure you have an NVIDIA GPU with the latest CUDA drivers installed.
+2. Set up a Docker container with the TensorFlow GPU image (e.g., `tensorflow/tensorflow:latest-gpu`).
+3. Run the training scripts provided in the `ml_workflow/training/` directory.
+
+> **Note:** Training the ensemble and EfficientNet V2 models from scratch can be computationally intensive and may take several hours depending on your hardware specifications.
 
 ---
 
@@ -312,7 +325,8 @@ FinalYearProject/
     │   └── knee_osteoarthritis/
     │       ├── ResNet_50/         # ResNet-50 configs (C1–C4)
     │       ├── DenseNet-121/      # DenseNet-121 configs (C1–C3)
-    │       └── EfficientNet_V2B3/ # EfficientNet configs (KerasTuner, C4)
+    │       └── EfficientNet_V2B3/ # EfficientNet configs (C1-C4)
+    |       └── Custom CNN + VGG16 Ensemble / # Custom CNN + VGG 16 Enesmble configs (C1-C2)
     └── best_model/                # Final deployed weights (.h5)
 ```
 
@@ -324,28 +338,28 @@ FinalYearProject/
 
 | Library               | Version | Purpose                               |
 | --------------------- | ------- | ------------------------------------- |
-| fastapi               | latest  | REST API framework                    |
-| tensorflow            | ≥2.20.0 | Deep learning inference               |
-| opencv-python         | latest  | Image preprocessing (CLAHE, resize)   |
-| numpy                 | ≥1.26.0 | Array operations                      |
-| langchain             | latest  | RAG pipeline orchestration            |
-| chromadb              | latest  | Vector database for RAG               |
-| sentence-transformers | latest  | Document embedding (all-MiniLM-L6-v2) |
-| sqlalchemy            | latest  | Database ORM                          |
-| psycopg2-binary       | latest  | PostgreSQL driver                     |
-| groq                  | latest  | LLM API client (Llama 3.3 70B)        |
+| ⚡ fastapi              | latest  | REST API framework                    |
+| 🧠 tensorflow           | ≥2.20.0 | Deep learning inference               |
+| 👁️ opencv-python        | latest  | Image preprocessing (CLAHE, resize)   |
+| 🔢 numpy                | ≥1.26.0 | Array operations                      |
+| 🦜 langchain            | latest  | RAG pipeline orchestration            |
+| 🗄️ chromadb             | latest  | Vector database for RAG               |
+| 📝 sentence-transformers| latest  | Document embedding (all-MiniLM-L6-v2) |
+| 🗃️ sqlalchemy           | latest  | Database ORM                          |
+| 🐘 psycopg2-binary      | latest  | PostgreSQL driver                     |
+| 🚀 groq                 | latest  | LLM API client (Llama 3.3 70B)        |
 
 ### Frontend (TypeScript/React)
 
 | Library                    | Version | Purpose                      |
 | -------------------------- | ------- | ---------------------------- |
-| react                      | 19.x    | UI framework                 |
-| vite                       | 8.x     | Build tool                   |
-| tailwindcss                | 4.x     | Utility-first CSS            |
-| framer-motion              | 12.x    | Animations & transitions     |
-| recharts                   | 3.x     | Data visualisation (charts)  |
-| three / @react-three/fiber | latest  | 3D knee joint visualisation  |
-| @supabase/supabase-js      | 2.x     | Auth, DB, and storage client |
+| ⚛️ react                    | 19.x    | UI framework                 |
+| ⚡ vite                     | 8.x     | Build tool                   |
+| 🎨 tailwindcss              | 4.x     | Utility-first CSS            |
+| 🎬 framer-motion            | 12.x    | Animations & transitions     |
+| 📊 recharts                 | 3.x     | Data visualisation (charts)  |
+| 🧊 three / @react-three/fiber | latest  | 3D knee joint visualisation  |
+| 🟢 @supabase/supabase-js    | 2.x     | Auth, DB, and storage client |
 
 ---
 
