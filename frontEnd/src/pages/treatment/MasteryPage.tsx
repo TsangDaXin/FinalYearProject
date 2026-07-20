@@ -28,10 +28,19 @@ export default function MasteryPage({ userStreak = 0, onboardingDate, onNavigate
   const [showCheckinReminder, setShowCheckinReminder] = React.useState(false);
   const [showCheckinModal, setShowCheckinModal] = React.useState(false);
 
-  React.useEffect(() => {
-    if (!userId) return;
+  const fetchChartData = React.useCallback(async () => {
+    let uid = userId;
+    // Fallback: if userId prop is null (new sign-up flow), resolve from Supabase session
+    if (!uid) {
+      try {
+        const { supabase } = await import('../../lib/supabase');
+        const { data: { session } } = await supabase.auth.getSession();
+        uid = session?.user?.id ?? null;
+      } catch {}
+    }
+    if (!uid) return;
     setIsLoadingChart(true);
-    fetch(`http://localhost:8000/api/progress/chart/combined/${userId}`)
+    fetch(`http://localhost:8000/api/progress/chart/combined/${uid}`, { cache: 'no-store' })
       .then(res => res.ok ? res.json() : null)
       .then(data => {
         if (data && data.weeks) {
@@ -47,6 +56,10 @@ export default function MasteryPage({ userStreak = 0, onboardingDate, onNavigate
       })
       .catch(err => console.error('Chart fetch error:', err))
       .finally(() => setIsLoadingChart(false));
+  }, [userId]);
+
+  React.useEffect(() => {
+    fetchChartData();
 
     // Check if weekly check-in is missing for current week
     const checkMissingCheckin = async () => {
@@ -126,10 +139,19 @@ export default function MasteryPage({ userStreak = 0, onboardingDate, onNavigate
     // Split data into 12-week cycles
     const cycleStart = selectedCycle * 12;
     const cycleEnd = cycleStart + 12;
-    const cycleData = chartData.filter(d => d.weekNum > cycleStart && d.weekNum <= cycleEnd);
+    let cycleData = chartData.filter(d => d.weekNum > cycleStart && d.weekNum <= cycleEnd);
     
     // If no data for this cycle, return empty array (shows empty state)
     if (cycleData.length === 0) return [];
+
+    // Recharts AreaChart requires at least 2 points to render. 
+    // If there's only 1 week of data, add a "Baseline" point so the chart actually renders.
+    if (cycleData.length === 1) {
+      cycleData = [
+        { ...cycleData[0], week: 'W0', weekNum: cycleStart },
+        cycleData[0]
+      ];
+    }
     
     if (timeFilter === 'weekly') return cycleData;
     if (timeFilter === '3-week') {
@@ -364,7 +386,7 @@ export default function MasteryPage({ userStreak = 0, onboardingDate, onNavigate
                   <h3 className="text-xl font-bold tracking-tight text-white">Rehabilitation Cycle Progression</h3>
                   <p className="text-sm text-gray-400 mt-1">Weekly self-reported joint health data per 12-week rehabilitation cycle. Composite mobility score is derived from pain and stiffness inputs; pain level is reported directly.</p>
                 </div>
-                {userStreak >= 7 && (
+                {rawChartData.length > 0 && (
                   <div className="flex items-center gap-3">
                     {/* Cycle selector — chevron navigation */}
                     {totalCycles > 1 && (
@@ -428,7 +450,7 @@ export default function MasteryPage({ userStreak = 0, onboardingDate, onNavigate
 
                 {/* Conditional Chart vs Locked Block */}
                 <div className="relative z-10 flex items-center justify-center w-full h-auto min-h-[700px]">
-                  {userStreak >= 7 ? (
+                  {rawChartData.length > 0 ? (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -688,11 +710,11 @@ export default function MasteryPage({ userStreak = 0, onboardingDate, onNavigate
                       <div className="text-sm md:text-base text-gray-300 leading-relaxed max-w-2xl mx-auto">
                         <p>
                           Your <span className="text-white font-semibold">longitudinal progress visualization</span> is currently locked.
-                          Complete your <span className="text-[#FF6D29] font-semibold">first 7 consecutive days</span> of prescribed physiotherapy routines to unlock this monitoring ecosystem.
-                          Once active, this chart will map your <span className="text-white font-semibold">daily exercise consistency</span> directly against your <span className="text-white font-semibold">joint mobility scores</span>—allowing you to visually track exactly how your effort translates into physical recovery.
+                          Complete your <span className="text-[#FF6D29] font-semibold">first weekly check-in</span> to unlock this monitoring ecosystem.
+                          Once active, this chart will map your <span className="text-white font-semibold">joint mobility scores</span> over time—allowing you to visually track your physical recovery and long-term progression.
                         </p>
                         <p className="text-xs text-gray-400 italic pt-4 mt-4 border-t border-white/5">
-                          Consistency builds data. Data reveals your path forward.
+                          Regular check-ins build data. Data reveals your path forward.
                         </p>
                       </div>
 
@@ -700,19 +722,19 @@ export default function MasteryPage({ userStreak = 0, onboardingDate, onNavigate
                       <motion.button
                         whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(255, 109, 41, 0.5)" }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={() => onNavigate('routine')}
+                        onClick={() => setShowCheckinModal(true)}
                         className="bg-gradient-to-r from-[#FF6D29] to-[#FF8D59] hover:from-[#FF8D59] hover:to-[#C2410C] text-white font-bold px-10 py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(255,109,41,0.4)] w-full text-base flex items-center justify-center gap-3 group"
                       >
                         <span className="material-symbols-outlined group-hover:scale-110 transition-transform">
-                          play_arrow
+                          fact_check
                         </span>
-                        Start Day 1 Session
+                        Complete First Check-In
                       </motion.button>
 
                       {/* Progress Indicator */}
                       <div className="pt-2 flex items-center justify-center gap-2 text-xs text-gray-500">
-                        <span className="material-symbols-outlined text-sm">schedule</span>
-                        <span>7 days to unlock • {Math.min(Math.round((userStreak / 7) * 100), 100)}% complete</span>
+                        <span className="material-symbols-outlined text-sm">pending_actions</span>
+                        <span>Pending first check-in • 0/1 completed</span>
                       </div>
                     </motion.div>
                   )}
@@ -881,6 +903,7 @@ export default function MasteryPage({ userStreak = 0, onboardingDate, onNavigate
         onCheckInComplete={() => {
           setShowCheckinModal(false);
           setShowCheckinReminder(false);
+          fetchChartData();
         }}
         onDismiss={() => setShowCheckinModal(false)}
       />

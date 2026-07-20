@@ -104,7 +104,24 @@ function App() {
       setCurrentView('diagnostics')
       return null
     }
-    return <DiagnosticResults data={diagnosticResult} onInitializeDashboard={() => setCurrentView('action_dashboard')} />
+    return <DiagnosticResults data={diagnosticResult} onInitializeDashboard={async () => {
+      // Ensure userId and onboardingDate are hydrated for new sign-ups
+      if (!userId || !onboardingDate) {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session?.user) {
+          if (!userId) setUserId(session.user.id)
+          if (!onboardingDate) {
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('onboarding_date')
+              .eq('id', session.user.id)
+              .single()
+            if (profile?.onboarding_date) setOnboardingDate(profile.onboarding_date)
+          }
+        }
+      }
+      setCurrentView('action_dashboard')
+    }} />
   }
 
   if (currentView === 'action_dashboard') {
@@ -169,11 +186,16 @@ function App() {
         <AuthPage 
           onAuthSuccess={async (type, name) => {
             if (name) setFullName(name)
+
+            // Always set userId regardless of signin/signup
+            const { data: { session: authSession } } = await supabase.auth.getSession()
+            if (authSession?.user) {
+              setUserId(authSession.user.id)
+            }
             
             if (type === 'signin') {
               const { data: { session } } = await supabase.auth.getSession()
               if (session?.user) {
-                setUserId(session.user.id)
                 const { data: profile } = await supabase
                   .from('profiles')
                   .select('kl_grade, streak_current, onboarding_date, xray_image_url, gradcam_image_url, probability_distribution, confidence_score')
