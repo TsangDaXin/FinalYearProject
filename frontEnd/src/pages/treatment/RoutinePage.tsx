@@ -88,13 +88,13 @@ const PDF_RESOURCES = [
   {
     title: 'Arthritis Foundation Exercise Guide',
     description: 'Comprehensive exercise recommendations for osteoarthritis, including safe movement patterns and intensity guidelines.',
-    url: 'https://www.arthritis.org/health-wellness/healthy-living/physical-activity/getting-started/exercise-guide',
+    url: 'https://www.arthritis.org/health-wellness/healthy-living/physical-activity/getting-started/your-exercise-solution',
     icon: 'menu_book',
   },
   {
     title: 'Versus Arthritis — Joint Protection',
     description: 'Evidence-based joint protection strategies and energy conservation techniques for daily activity management.',
-    url: 'https://www.versusarthritis.org/about-arthritis/managing-symptoms/joint-protection/',
+    url: 'https://www.tims.nhs.uk/wp-content/uploads/2021/12/looking-after-your-joints-information-booklet.pdf',
     icon: 'shield_with_heart',
   },
   {
@@ -467,7 +467,7 @@ export default function RoutinePage({ patientKLGrade, onNavigate, userName = 'Gu
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #555; }
       `}</style>
-      
+
       {/* Side Navigation Shell */}
       <aside className="flex flex-col h-full py-8 px-4 gap-2 fixed left-0 top-0 z-50 bg-[#0A0A0C] border-r border-white/5 hidden md:flex w-64">
         <div className="px-4 mb-8 mt-2">
@@ -523,7 +523,7 @@ export default function RoutinePage({ patientKLGrade, onNavigate, userName = 'Gu
 
         {/* Page Content */}
         <div className="p-4 md:p-10 max-w-7xl mx-auto w-full space-y-8 flex-grow">
-          
+
           {/* Page Header */}
           <motion.section initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="flex flex-col gap-3">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">Weekly Clinical Routine</h2>
@@ -536,7 +536,7 @@ export default function RoutinePage({ patientKLGrade, onNavigate, userName = 'Gu
           </motion.section>
 
           <motion.div variants={containerVariants} initial="hidden" animate="show" className="space-y-8">
-            
+
             {/* ═══ Featured Exercise Videos ═══ */}
             <motion.section variants={itemVariants} className="flex flex-col gap-6">
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
@@ -582,9 +582,8 @@ export default function RoutinePage({ patientKLGrade, onNavigate, userName = 'Gu
                     <motion.div
                       key={video.id}
                       whileHover={{ y: -4 }}
-                      className={`bento-card overflow-hidden group cursor-pointer transition-all duration-500 ${
-                        completedVideos.has(idx) ? 'border-emerald-500/50' : ''
-                      }`}
+                      className={`bento-card overflow-hidden group cursor-pointer transition-all duration-500 ${completedVideos.has(idx) ? 'border-emerald-500/50' : ''
+                        }`}
                     >
                       <div className="aspect-video rounded-t-xl overflow-hidden border-b border-[#424754]/30">
                         <iframe
