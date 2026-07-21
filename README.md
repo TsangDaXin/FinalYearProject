@@ -168,11 +168,15 @@ If you wish to train the model from scratch again:
 2. Set up a Docker container with the TensorFlow GPU image (e.g., `tensorflow/tensorflow:latest-gpu`).
 3. Run the training scripts provided in the `ml_workflow/training/` directory.
 
-> **Note:** Training the ensemble and EfficientNet V2 models from scratch can be computationally intensive and may take several hours depending on your hardware specifications.
+> **Note:** Training the ensemble and EfficientNet V2 models can be computationally intensive and may take several hours depending on your hardware specifications.
 
 ---
 
 ## Tech Stack
+
+<p align="center">
+  <img src="dashboard_screenshot/techstack.png" alt="Overall Tech Stack Architecture" width="100%" />
+</p>
 
 | Layer    | Technology                                                                   |
 | -------- | ---------------------------------------------------------------------------- |
@@ -285,6 +289,42 @@ The application will be available at `http://localhost:5173`.
 
 ---
 
+## FastAPI backend endpoints
+
+### X-Ray Prediction & Diagnostics
+
+**POST**
+- `POST /predict` - Upload and analyze an X-ray image for KOA severity prediction.
+- `POST /predict/followup` - Upload a follow-up X-ray image for continuous monitoring.
+- `POST /predict/followup/confirm` - Confirm and save the follow-up prediction results.
+
+**GET**
+- `GET /scan-history/{user_id}` - Retrieve the patient's past X-ray scan history.
+
+### Rehabilitation & Progress Tracking
+
+**POST**
+- `POST /api/progress/log-session` - Log a completed physiotherapy or rehabilitation session.
+- `POST /api/progress/checkin/weekly` - Submit the weekly pain and stiffness check-in.
+
+**GET**
+- `GET /api/progress/summary/{user_id}` - Get the user's progress summary (e.g., streak, XP, mastery).
+- `GET /api/progress/chart/combined/{user_id}` - Retrieve combined chart data for longitudinal mobility and pain tracking.
+
+### AI Recommendations & Assistant
+
+**POST**
+- `POST /api/recommendations` - Generate AI-powered physiotherapy recommendations based on patient data.
+- `POST /api/chat` - Interact with the RAG-powered SteadyGerak Assistant Chat for personalized guidance.
+- `POST /api/insights` - Generate explainable diagnostic insights for the patient.
+
+### System Health
+
+**GET**
+- `GET /health` - Verify the API status and ensure ML models are loaded correctly.
+
+---
+
 ## Project Structure
 
 ```
@@ -374,3 +414,13 @@ This project was developed as a Final Year Project at Asia Pacific University of
 **Owen Tsang** — TP071168  
 BSc (Hons) in Computer Science with data analytics  
 Asia Pacific University of Technology & Innovation
+
+---
+
+## Project Presentation
+
+To better understand the SteadyGerak platform, its architecture, and its features, you can watch the following project presentation:
+
+[![SteadyGerak Project Presentation](https://img.youtube.com/vi/4bTPiX3PnYY/0.jpg)](https://www.youtube.com/watch?v=4bTPiX3PnYY)
+
+*Click the image above or [here](https://www.youtube.com/watch?v=4bTPiX3PnYY) to watch the presentation on YouTube.*
